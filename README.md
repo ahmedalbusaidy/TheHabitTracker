@@ -25,3 +25,20 @@ Habits: Tiny Changes, Remarkable Results* by *James Clear* has inspired me to st
 time, I started *Bullet Journaling (BuJo)*, so I integrated James ideas into journaling. Things went well, I was
 committed for more than a week, but soon I started to procrastinate and ignore recording in my journal. This was because
 the process was time-consuming and not efficient, which lead to the idea of this project!
+
+***
+
+### User Stories
+
+- As a user, I want to be able to add a new habit with commitment target (e.g. number of days/month) to a list of habits
+- As a user, I want to be able to delete a habit from my list of habits
+- As a user, I want to be able to record my progress of all habits easily
+- As a user, I want to be able to record my progress to an individual habit
+- As a user, I want to be able to modify my previously recorded progress of any habits
+- As a user, I want to be able to see a list of all my habits with details including: commitment target, number of
+committed days, and maximum commitments in a row
+- As a user, I want to be able to see a record of an individual habit
+- As a user, I want to be able to reset all of my habit's progresses to zero 
+- As a user, I want to be able to reset a single habit's progress to zero
+- As a user, I want to be able to see a confirmation dialog before deleting a habit or resetting its progress
+(for example: "Are you sure you want to permanently delete/reset this habit?")
