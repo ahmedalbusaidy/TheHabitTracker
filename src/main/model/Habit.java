@@ -1,9 +1,9 @@
 package model;
 
 public class Habit {
-    String habitName;       //name of the habit
-    int commitmentTarget;   //number of days to commit per month
-    int progress;           //counter: number of days committed
+    private String habitName;       //name of the habit
+    private int commitmentTarget;   //number of days to commit per month
+    private int progress;           //counter: number of days committed
 
     /*
      * REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
