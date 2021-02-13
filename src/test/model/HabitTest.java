@@ -25,7 +25,7 @@ public class HabitTest {
     public void testConstructor() {
         assertEquals(habitName, running.getHabitName());
         assertEquals(commitmentTarget, running.getCommitmentTarget());
-        assertEquals(0, running.getProgress());
+        assertEquals(0, running.getTotalCommittedDays());
     }
 
     @Test
@@ -42,9 +42,9 @@ public class HabitTest {
         assertEquals(commitmentTarget, running.getCommitmentTarget());
     }
 
-    // Check if you need the set progress or not
-    @Test
-    public void testSetProgress() {}
+    //TODO: if it was decided to keep setProgress method, implement the test suite for it
+    //@Test
+    //public void testSetProgress() {}
 
     @Test
     public void testSetStartDate() {
@@ -54,12 +54,26 @@ public class HabitTest {
     }
 
     @Test
-    public void testIncrementProgress() {
-        assertEquals(0, running.getProgress());
-        running.incrementProgress();
-        assertEquals(1, running.getProgress());
-        running.incrementProgress();
-        assertEquals(2, running.getProgress());
+    public void testIncrementTotalCommittedDays() {
+        running.incrementTotalCommittedDays();
+        assertEquals(1, running.getTotalCommittedDays());
+        running.incrementTotalCommittedDays();
+        assertEquals(2, running.getTotalCommittedDays());
+    }
+
+    @Test
+    public void testDecrementTotalCommittedDays() {
+        running.incrementTotalCommittedDays();
+        running.incrementTotalCommittedDays();
+
+        running.decrementTotalCommittedDays();
+        assertEquals(1, running.getTotalCommittedDays());
+
+        running.decrementTotalCommittedDays();
+        assertEquals(0, running.getTotalCommittedDays());
+
+        running.decrementTotalCommittedDays();
+        assertEquals(0, running.getTotalCommittedDays());
     }
 
 
