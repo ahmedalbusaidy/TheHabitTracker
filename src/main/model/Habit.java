@@ -11,7 +11,7 @@ public class Habit {
     private int totalCommittedDays;         //counter: total number of days committed
     private int currentStreak;              //the current streak of committed days in a row
     private int highestStreak;              //the highest streak of committed days in a row
-    private Date startDate;                 //start date i.e. the date habit was added
+    private Date startDate = new Date();                 //start date i.e. the date habit was added
     private HabitProgress habitProgress;    //keep track of the progress by dates
 
 
@@ -62,7 +62,7 @@ public class Habit {
         totalCommittedDays = 0;
         currentStreak = 0;
         highestStreak = 0;
-        //TODO: date must be set to today's date
+        startDate = new Date();
     }
 
     /*
@@ -77,7 +77,11 @@ public class Habit {
                 break;
             case "currentStreak":
                 currentStreak++;
+                if (currentStreak > highestStreak) {
+                    highestStreak = currentStreak;
+                }
                 break;
+                //TODO: highest streak might be deleted
             case "highestStreak":
                 highestStreak++;
                 break;
@@ -105,9 +109,21 @@ public class Habit {
             case "highestStreak":
                 if (highestStreak > 0) {
                     highestStreak--;
+                    //TODO: decrementing after incrementing
                 }
                 break;
         }
+    }
+
+    /*
+     * EFFECTS: returns a string representation of the habit
+     */
+    @Override
+    public String toString() {
+        int daysToTarget = commitmentTarget - totalCommittedDays;
+        String habitStr = String.format("%-25s%-19d%-19d%-11d%-19d%-14d", habitName, currentStreak,
+                                        highestStreak, commitmentTarget, totalCommittedDays, daysToTarget);
+        return habitStr;
     }
 
     /*

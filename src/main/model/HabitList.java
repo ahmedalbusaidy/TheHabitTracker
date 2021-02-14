@@ -12,61 +12,59 @@ public class HabitList {
      * EFFECTS: creates an empty list of habits
      */
     public HabitList() {
-        //stub
+        listOfHabits = new ArrayList<>();
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS:  add habit to listOfHabits
+     * EFFECTS:  add habit to listOfHabits if it does not already exists and return true, otherwise return false
      */
-    public void addHabit(Habit habit) {
-        //stub
+    public boolean addHabit(Habit habit) {
+        if (!listOfHabits.contains(habit)) {
+            listOfHabits.add(habit);
+            return true;
+        }
+        return false;
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: removes habit from listOfHabits
+     * EFFECTS: removes habit from listOfHabits if it exists and return true, otherwise return false
      */
-    public void removeHabit(Habit habit) {
-        //stub
+    public boolean removeHabit(Habit habit) {
+        if (listOfHabits.contains(habit)) {
+            listOfHabits.remove(habit);
+            return true;
+        }
+        return false;
     }
 
     /*
      * EFFECTS: returns true if listOfHabits contains habit, otherwise returns false
      */
     public boolean containsHabit(Habit habit) {
-        return false;   //stub
-    }
-
-    //TODO: check whether this method in needed here or not
-    /*
-     * REQUIRES: listOfHabits contains at least one element
-     * MODIFIES: this and Habit
-     * EFFECTS:  for each habit in the listOfHabits, the progress is incremented by one
-
-    public void recordProgress(ArrayList<Habit> listOfHabits) {
-        //stub
-    }*/
-
-    /*
-     * REQUIRES: listOfHabits contains at least one element
-     * MODIFIES: this and Habit
-     * EFFECTS:  for each habit in the listOfHabits, the progress is reset to zero
-     */
-    public void resetLog(ArrayList<Habit> listOfHabits) {
-        //stub
+        return listOfHabits.contains(habit);
     }
 
     /*
      * REQUIRES: listOfHabits contains at least one element
-     * EFFECTS:  for each habit in the listOfHabits, it prints its log which includes:
+     * EFFECTS:  It prints a log of the habit at index - 1 on listOfHabits. This log includes:
      *              - habit name
+     *              - current streak
+     *              - highest streak
      *              - commitment target
-     *              - progress
+     *              - total committed days
      *              - days left to reach the target
-     *              - maximum commitment in a row
      */
-    public String printLog(ArrayList<Habit> listOfHabits) {
-        return null;    //stub
+    public void printSummaryLog(int index) {
+        Habit habit = listOfHabits.get(index);
+        System.out.println(habit.toString());
+    }
+
+    /*
+     * EFFECTS:  returns listOfHabits
+     */
+    public ArrayList<Habit> getListOfHabits() {
+        return listOfHabits;
     }
 }
