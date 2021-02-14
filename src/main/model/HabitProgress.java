@@ -20,8 +20,8 @@ public class HabitProgress {
      * MODIFIES: this
      * EFFECTS: adds the date to datesCommitted list when progress is incremented
      */
-    public void addDate() {
-        //stub
+    public void addDate(Date date) {
+        datesCommitted.add((date));
     }
 
     /*
@@ -29,7 +29,14 @@ public class HabitProgress {
      * EFFECTS: removes last date added to this
      */
     public void removeDate() {
-        //stub
+        datesCommitted.remove(datesCommitted.size() - 1);
+    }
+
+    /*
+     * EFFECTS: returns datesCommitted
+     */
+    public ArrayList<Date> getDatesCommitted() {
+        return datesCommitted;
     }
 
 }
