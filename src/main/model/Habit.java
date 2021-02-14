@@ -3,24 +3,28 @@ package model;
 import java.util.Date;
 
 public class Habit {
-    private String habitName;           //name of the habit
-    private int commitmentTarget;       //number of days to commit per month
-    private int totalCommittedDays;     //counter: total number of days committed
-    private int currentStreak;          //the current streak of committed days in a row
-    private int highestStreak;          //the highest streak of committed days in a row
-    private static Date startDate;      //start date i.e. the date habit was added
+    private String habitName;               //name of the habit
+    private int commitmentTarget;           //number of days to commit per month
+    private int totalCommittedDays;         //counter: total number of days committed
+    private int currentStreak;              //the current streak of committed days in a row
+    private int highestStreak;              //the highest streak of committed days in a row
+    private Date startDate;                 //start date i.e. the date habit was added
+    private HabitProgress habitProgress;    //keep track of the progress by dates
+
 
     //TODO: how to track the streaks?
 
     /*
      * REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
+     * MODIFIES: HabitProgress
      * EFFECTS:  name of the habit is set to habitName; commitment target is set to commitmentTarget;
-     *           totalCommittedDays is set to zero;
+     *           totalCommittedDays is set to zero; constructs HabitProgress object to store habit progress
      */
     public Habit(String habitName, int commitmentTarget) {
         this.habitName = habitName;
         this.commitmentTarget = commitmentTarget;
         totalCommittedDays = 0;
+        habitProgress = new HabitProgress();
     }
 
     /*
@@ -47,6 +51,7 @@ public class Habit {
     public void setStartDate(Date date) {
         startDate = date;
     }
+
     /*
      * EFFECTS:  resets totalCommittedDays, currentStreak, and highestStreak to zero;
      */
@@ -136,6 +141,7 @@ public class Habit {
     public int getCurrentStreak() {
         return currentStreak;
     }
+
     /*
      * EFFECTS: return highestStreak
      */
