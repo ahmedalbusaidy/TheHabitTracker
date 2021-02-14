@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
+/*
+ * This class represents the list of habits
+ */
 public class HabitList {
     private ArrayList<Habit> listOfHabits;  //list containing all of the habits
 

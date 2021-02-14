@@ -2,6 +2,9 @@ package model;
 
 import java.util.Date;
 
+/*
+ * This class represents a habit and its attributes
+ */
 public class Habit {
     private String habitName;               //name of the habit
     private int commitmentTarget;           //number of days to commit per month

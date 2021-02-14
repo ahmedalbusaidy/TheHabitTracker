@@ -7,6 +7,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*
+ * This class tests the Habit class
+ */
 public class HabitTest {
     private String habitName;           //name of the habit
     private int commitmentTarget;       //number of days to commit per month

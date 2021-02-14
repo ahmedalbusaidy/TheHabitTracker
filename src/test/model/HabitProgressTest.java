@@ -3,12 +3,14 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/*
+ * This class tests the HabitProgress class
+ */
 public class HabitProgressTest {
     private HabitProgress habitLog;
     private Date date;
