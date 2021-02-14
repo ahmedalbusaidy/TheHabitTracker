@@ -153,7 +153,10 @@ public class HabitTest {
         assertEquals(0, running.getHighestStreak());
     }
 
+    @Test
+    public void testToString() {
 
+    }
 
 
 }

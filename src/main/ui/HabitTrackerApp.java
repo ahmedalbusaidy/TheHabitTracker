@@ -1,5 +1,6 @@
 //TODO: Maybe I'll need small introductory displayed when the program is run before the options
 //TODO: Maybe I'll need small introductory paragraphs explaining the functions (add/record/reset ..) before the options
+//TODO: add reference to TellerApp
 
 package ui;
 
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class HabitTrackerApp {
     private Scanner input;
     private HabitList habitList = new HabitList();
+    boolean isRecorded = false;
 
     // EFFECTS: runs the tracker application
     public HabitTrackerApp() {
@@ -110,9 +112,9 @@ public class HabitTrackerApp {
     //EFFECTS:  records or modifies progress
     public void recordModifyProgress() {
         printListOfHabits();
-        //TODO: modify the output text
         System.out.println("Choose the habits that you want to record/modify their progress."
-                            + " (Please separate the numbers with a space)");
+                            + " (Please separate the numbers with a space)"
+                            + "\tNote: this will modify all of the listed habits");
         input = new Scanner(System.in);
         String userInput1 = input.nextLine();
         System.out.println("You selected:");
@@ -121,11 +123,15 @@ public class HabitTrackerApp {
             System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
         }
 
-        System.out.println("Choose one option:\n"
-                            + "\tD -> 'done', mark your today's progress as completed\n"
-                            + "\tN -> 'not' done, change your today's progress to incomplete\n"
-                            + "\tC -> 'cancel' and return to the main menu\n"
-                            + "\t(Note: this will modify all of the listed habits)");
+        if (isRecorded) {
+            System.out.println("Choose one option:\n"
+                    + "\tN -> 'not' done, change your today's progress to incomplete\n"
+                    + "\tC -> 'cancel' and return to the main menu\n");
+        } else {
+            System.out.println("Choose one option:\n"
+                    + "\tD -> 'done', mark your today's progress as completed\n"
+                    + "\tC -> 'cancel' and return to the main menu\n");
+        }
 
         input = new Scanner(System.in);
         String userInput2 = input.next();
@@ -137,7 +143,6 @@ public class HabitTrackerApp {
     //MODIFIES: this
     //EFFECTS:  resets progress
     public void resetProgress() {
-        //TODO: Implement the method
         //TODO: the following code snippet (8 lines) is repeated, see if you can extract it out
         printListOfHabits();
         //TODO: modify the output text
@@ -236,14 +241,18 @@ public class HabitTrackerApp {
                 Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
                 habit.increment("totalCommittedDays");
                 habit.increment("currentStreak");
+                habit.getHabitProgress().addDate(new Date());
+                isRecorded = habit.getHabitProgress().isRecorded();
             }
             System.out.println("Your progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("n")) {
+
             for (String s : command1.split(" ")) {
                 Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
                 //TODO: check on after modifying decrement method
                 habit.decrement("totalCommittedDays");
                 habit.decrement("currentStreak");
+                habit.getHabitProgress().removeDate();
             }
             System.out.println("Your progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("c")) {

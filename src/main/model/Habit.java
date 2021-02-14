@@ -11,7 +11,7 @@ public class Habit {
     private int totalCommittedDays;         //counter: total number of days committed
     private int currentStreak;              //the current streak of committed days in a row
     private int highestStreak;              //the highest streak of committed days in a row
-    private Date startDate = new Date();                 //start date i.e. the date habit was added
+    private Date startDate = new Date();    //start date i.e. the date habit was added
     private HabitProgress habitProgress;    //keep track of the progress by dates
 
 
@@ -80,10 +80,6 @@ public class Habit {
                 if (currentStreak > highestStreak) {
                     highestStreak = currentStreak;
                 }
-                break;
-                //TODO: highest streak might be deleted
-            case "highestStreak":
-                highestStreak++;
                 break;
         }
     }
@@ -166,5 +162,12 @@ public class Habit {
      */
     public int getHighestStreak() {
         return highestStreak;
+    }
+
+    /*
+     * EFFECTS: return habitProgress
+     */
+    public HabitProgress getHabitProgress() {
+        return habitProgress;
     }
 }

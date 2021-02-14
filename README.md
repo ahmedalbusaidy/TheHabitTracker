@@ -42,3 +42,4 @@ committed days, and maximum commitments in a row
 - As a user, I want to be able to reset a single habit's progress to zero
 - As a user, I want to be able to see a confirmation dialog before deleting a habit or resetting its progress
 (for example: "Are you sure you want to permanently delete/reset this habit?")
+
