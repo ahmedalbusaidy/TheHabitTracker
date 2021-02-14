@@ -66,18 +66,25 @@ public class HabitTrackerApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("1")) {
-            addHabit();
-        } else if (command.equals("2")) {
-            recordModifyProgress();
-        } else if (command.equals("3")) {
-            resetProgress();
-        } else if (command.equals("4")) {
-            printLog();
-        } else if (command.equals("5")) {
-            deleteHabit();
-        } else {
-            System.out.println("Selection not valid...");
+        switch (command) {
+            case "1":
+                addHabit();
+                break;
+            case "2":
+                recordModifyProgress();
+                break;
+            case "3":
+                resetProgress();
+                break;
+            case "4":
+                printLog();
+                break;
+            case "5":
+                deleteHabit();
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
         }
     }
 
