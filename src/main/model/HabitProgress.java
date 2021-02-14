@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.tools.javac.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ import java.util.Date;
  */
 public class HabitProgress {
     private ArrayList<Date> datesCommitted;
+    boolean isRecorded = false;
 
     /*
      * EFFECTS: constructs the datesCommitted method
@@ -22,6 +25,7 @@ public class HabitProgress {
      */
     public void addDate(Date date) {
         datesCommitted.add((date));
+        isRecorded = true;
     }
 
     /*
@@ -30,6 +34,16 @@ public class HabitProgress {
      */
     public void removeDate() {
         datesCommitted.remove(datesCommitted.size() - 1);
+        isRecorded = false;
+    }
+
+    public boolean isRecorded() {
+        String dateOfToday = String.format("%tA %<tB %<te, %<tY%n", new Date());
+        String dateLastRecorded = String.format("%tA %<tB %<te, %<tY%n", datesCommitted.get(datesCommitted.size() - 1));
+        if (dateLastRecorded.equals(dateOfToday)) {
+            return true;
+        }
+        return false;
     }
 
     /*
