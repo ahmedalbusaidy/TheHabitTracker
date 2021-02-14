@@ -44,10 +44,8 @@ public class HabitProgress {
     public boolean isRecorded() {
         String dateOfToday = String.format("%tA %<tB %<te, %<tY%n", new Date());
         String dateLastRecorded = String.format("%tA %<tB %<te, %<tY%n", datesCommitted.get(datesCommitted.size() - 1));
-        if (dateLastRecorded.equals(dateOfToday)) {
-            return true;
-        }
-        return false;
+
+        return dateLastRecorded.equals(dateOfToday);
     }
 
     /*
