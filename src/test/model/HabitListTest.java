@@ -86,5 +86,10 @@ public class HabitListTest {
         assertEquals(false, doesContainHabit);
     }
 
-    //TODO: test toString
+    //TODO: add test to printSummaryLog
+    @Test
+    public void testPrintSummaryLog() {
+        habitList.addHabit(reading);
+        habitList.addHabit(coding);
+    }
 }

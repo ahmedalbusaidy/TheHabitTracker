@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+//TODO: modify tests
 /*
  * This class tests the Habit class
  */
@@ -66,10 +67,12 @@ public class HabitTest {
         running.increment(variableName);
         running.increment(variableName);
 
+        running.setStartDate(new Date());
         running.resetProgress();
         assertEquals(0, running.getTotalCommittedDays());
         assertEquals(0, running.getCurrentStreak());
         assertEquals(0, running.getHighestStreak());
+        assertNotEquals(startDate, running.getStartDate());
     }
 
     @Test
@@ -155,7 +158,8 @@ public class HabitTest {
 
     @Test
     public void testToString() {
-
+        assertTrue(running.toString().contains("running                  0                  0                  "
+                                                + "30         0                  30            "));
     }
 
 

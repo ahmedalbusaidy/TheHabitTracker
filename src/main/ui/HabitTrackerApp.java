@@ -1,4 +1,3 @@
-//TODO: Maybe I'll need small introductory displayed when the program is run before the options
 //TODO: Maybe I'll need small introductory paragraphs explaining the functions (add/record/reset ..) before the options
 //TODO: add reference to TellerApp
 
@@ -28,6 +27,9 @@ public class HabitTrackerApp {
         input = new Scanner(System.in);
 
         System.out.println("\nWelcome: " + System.getProperty("user.name"));
+        System.out.println("\nNow you can track your habits easily using The Habit Tracker, where you can add new"
+                            + "\nhabits to your list, set a commitment target, display your progress and much more!"
+                            + "\nHabit Tracking never been easier before!");
         while (keepGoing) {
             displayMenu();
             command = input.next();
@@ -84,26 +86,14 @@ public class HabitTrackerApp {
     private void addHabit() {
         String habitName;
         if (habitList.getListOfHabits().size() == 0) {
-            System.out.println("You have not added any habit yet.");
+            System.out.println("\nYou have not added any habit yet.");
         }
         System.out.println("Let's add a new habit to your list. Start by typing the name of your habit:");
         input = new Scanner(System.in);
         habitName = input.nextLine();
         System.out.println("What is your commitment target? (in days)");
-        Habit habit = null;
-        int commitmentTarget;
-        boolean done = false;
-        while (!done) {
-            try {
-                commitmentTarget = input.nextInt();
-                habit = addHabitToListOfHabits(habitName, commitmentTarget);
-                done = true;
-            } catch (Exception e) {
-                System.out.println("Oops! It seems that you haven't typed an integer. Please type in integers only.");
-                input = new Scanner(System.in);
-            }
-        }
-        System.out.printf("Your habit is successfully added to the habit list:"
+        Habit habit = processGettingCommitmentTarget(habitName);
+        System.out.printf("\nYour habit is successfully added to the habit list:"
                         + "%nHabit: %s%nTarget: %d days%nStart Date: %tA %<tB %<te, %<tY%n",
                           habit.getHabitName(), habit.getCommitmentTarget(), habit.getStartDate());
     }
@@ -112,16 +102,11 @@ public class HabitTrackerApp {
     //EFFECTS:  records or modifies progress
     public void recordModifyProgress() {
         printListOfHabits();
-        System.out.println("Choose the habits that you want to record/modify their progress."
+        System.out.println("\nChoose the habits that you want to record/modify their progress."
                             + " (Please separate the numbers with a space)"
-                            + "\tNote: this will modify all of the listed habits");
-        input = new Scanner(System.in);
-        String userInput1 = input.nextLine();
-        System.out.println("You selected:");
-        //TODO: add formatting to the printed code
-        for (String s : userInput1.split(" ")) {
-            System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
-        }
+                            + "\nNote: this will modify all of the listed habits");
+
+        String userInput1 = printOutUserSelectionFromHabitList();
 
         if (isRecorded) {
             System.out.println("Choose one option:\n"
@@ -135,7 +120,7 @@ public class HabitTrackerApp {
 
         input = new Scanner(System.in);
         String userInput2 = input.next();
-        //TODO: I might need an if statement to not repeat if already done
+
         processRecordProgressCommand(userInput1, userInput2);
 
     }
@@ -143,18 +128,10 @@ public class HabitTrackerApp {
     //MODIFIES: this
     //EFFECTS:  resets progress
     public void resetProgress() {
-        //TODO: the following code snippet (8 lines) is repeated, see if you can extract it out
         printListOfHabits();
-        //TODO: modify the output text
-        System.out.println("Choose the habits that you want to reset their progress."
+        System.out.println("\nChoose the habits that you want to reset their progress."
                 + " (Please separate the numbers with a space)");
-        input = new Scanner(System.in);
-        String userInput1 = input.nextLine();
-        //TODO: add formatting to the printed code
-        System.out.println("You selected:");
-        for (String s : userInput1.split(" ")) {
-            System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
-        }
+        String userInput1 = printOutUserSelectionFromHabitList();
 
         System.out.println("Are you sure you want to reset your progress?:\n"
                 + "\tR -> 'reset' the progress\n"
@@ -170,8 +147,7 @@ public class HabitTrackerApp {
     //EFFECTS:  prints summary log for each habit selected
     public void printLog() {
         printListOfHabits();
-        //TODO: modify the output text
-        System.out.println("Choose the habits that you want to print a summary of their progress."
+        System.out.println("\nChoose the habits that you want to print a summary of their progress."
                 + " (Please separate the numbers with a space)");
         input = new Scanner(System.in);
         String userInput = input.nextLine();
@@ -190,19 +166,10 @@ public class HabitTrackerApp {
 
     //MODIFIES: this
     public void deleteHabit() {
-        //TODO: Implement the method
-        //TODO: the following code snippet (8 lines) is repeated, see if you can extract it out
         printListOfHabits();
-        //TODO: modify the output text
-        System.out.println("Choose the habits that you want to delete from your list."
+        System.out.println("\nChoose the habits that you want to delete from your list."
                 + " (Please separate the numbers with a space)");
-        input = new Scanner(System.in);
-        String userInput1 = input.nextLine();
-        //TODO: add formatting to the printed code
-        System.out.println("You selected:");
-        for (String s : userInput1.split(" ")) {
-            System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
-        }
+        String userInput1 = printOutUserSelectionFromHabitList();
 
         System.out.println("Are you sure you want to delete your progress?:\n"
                 + "\tD -> 'delete' the progress\n"
@@ -225,9 +192,27 @@ public class HabitTrackerApp {
         return habit;
     }
 
+    //EFFECTS: process getting commitment target from user input; deals with exception errors
+    private Habit processGettingCommitmentTarget(String habitName) {
+        Habit habit = null;
+        int commitmentTarget;
+        boolean done = false;
+        while (!done) {
+            try {
+                commitmentTarget = input.nextInt();
+                habit = addHabitToListOfHabits(habitName, commitmentTarget);
+                done = true;
+            } catch (Exception e) {
+                System.out.println("Oops! It seems that you haven't typed an integer. Please type in integers only.");
+                input = new Scanner(System.in);
+            }
+        }
+        return habit;
+    }
+
     //EFFECTS: prints list of habits
     private void printListOfHabits() {
-        System.out.println("Here is a list of your habits:");
+        System.out.println("\nHere is a list of your habits:");
         for (int i = 0; i < habitList.getListOfHabits().size(); i++) {
             System.out.println("\t" + (i + 1) + " -> " + habitList.getListOfHabits().get(i).getHabitName());
         }
@@ -244,7 +229,7 @@ public class HabitTrackerApp {
                 habit.getHabitProgress().addDate(new Date());
                 isRecorded = habit.getHabitProgress().isRecorded();
             }
-            System.out.println("Your progress has been recorded successfully!");
+            System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("n")) {
 
             for (String s : command1.split(" ")) {
@@ -254,12 +239,11 @@ public class HabitTrackerApp {
                 habit.decrement("currentStreak");
                 habit.getHabitProgress().removeDate();
             }
-            System.out.println("Your progress has been recorded successfully!");
+            System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("c")) {
-            System.out.println("Cancelled...");
+            System.out.println("\nCancelled...");
         } else {
-            //TODO: Maybe if selection not valid it should return to the same menu, not the main menu?
-            System.out.println("Selection not valid...");
+            System.out.println("\nSelection not valid...");
         }
     }
 
@@ -271,12 +255,11 @@ public class HabitTrackerApp {
                 Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
                 habit.resetProgress();
             }
-            System.out.println("Your progress has been reset successfully!");
+            System.out.println("\nYour progress has been reset successfully!");
         } else if (command2.toLowerCase().equals("c")) {
-            System.out.println("Cancelled...");
+            System.out.println("\nCancelled...");
         } else {
-            //TODO: Maybe if selection not valid it should return to the same menu, not the main menu?
-            System.out.println("Selection not valid...");
+            System.out.println("\nSelection not valid...");
         }
     }
 
@@ -290,12 +273,25 @@ public class HabitTrackerApp {
                 habitList.removeHabit(habit);
                 i++;
             }
-            System.out.println("Your selection has been deleted successfully!");
+            System.out.println("\nYour selection has been deleted successfully!");
         } else if (command2.toLowerCase().equals("c")) {
             System.out.println("Cancelled...");
         } else {
-            //TODO: Maybe if selection not valid it should return to the same menu, not the main menu?
-            System.out.println("Selection not valid...");
+            System.out.println("\nSelection not valid...");
         }
+    }
+
+    //EFFECTS: prints out user selection that will be processed, and returns userInput1
+    private String printOutUserSelectionFromHabitList() {
+        input = new Scanner(System.in);
+        String userInput1 = input.nextLine();
+        int i = 1;
+        System.out.println("You selected:");
+        for (String s : userInput1.split(" ")) {
+            System.out.print("\t" + i + ". ");
+            System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
+            i++;
+        }
+        return userInput1;
     }
 }
