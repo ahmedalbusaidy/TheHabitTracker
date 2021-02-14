@@ -6,7 +6,11 @@ public class Habit {
     private String habitName;           //name of the habit
     private int commitmentTarget;       //number of days to commit per month
     private int totalCommittedDays;     //counter: total number of days committed
+    private int currentStreak;          //the current streak of committed days in a row
+    private int highestStreak;          //the highest streak of committed days in a row
     private static Date startDate;      //start date i.e. the date habit was added
+
+    //TODO: how to track the streaks?
 
     /*
      * REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
@@ -36,16 +40,6 @@ public class Habit {
         this.commitmentTarget = commitmentTarget;
     }
 
-    //TODO: decide whether this method is needed or not
-    /*
-     * REQUIRES: progress >= 0
-     * MODIFIES: this
-     * EFFECTS:  sets this.progress to progress
-     */
-    /*public void setProgress() {
-        //stub
-    }*/
-
     /*
      * MODIFIES: this
      * EFFECTS:  sets startDate to current date
@@ -53,23 +47,58 @@ public class Habit {
     public void setStartDate(Date date) {
         startDate = date;
     }
-
     /*
-     * MODIFIES: this
-     * EFFECTS:  increment total committed days by one
+     * EFFECTS:  resets totalCommittedDays, currentStreak, and highestStreak to zero;
      */
-    public void incrementTotalCommittedDays() {
-        totalCommittedDays++;
+    public void resetProgress() {
+        totalCommittedDays = 0;
+        currentStreak = 0;
+        highestStreak = 0;
+        //TODO: date must be set to today's date
     }
 
     /*
+     * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
      * MODIFIES: this
-     * EFFECTS:  if totalCommittedDays > 0: decrement total committed days by one,
+     * EFFECTS:  increment one of totalCommittedDays, currentStreak, or highestStreak by one
+     */
+    public void increment(String variableName) {
+        switch (variableName) {
+            case "totalCommittedDays":
+                totalCommittedDays++;
+                break;
+            case "currentStreak":
+                currentStreak++;
+                break;
+            case "highestStreak":
+                highestStreak++;
+                break;
+        }
+    }
+
+    /*
+     * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
+     * MODIFIES: this
+     * EFFECTS:  decrement one of totalCommittedDays, currentStreak, or highestStreak by one if it is > 0.
      *           otherwise do nothing
      */
-    public void decrementTotalCommittedDays() {
-        if (totalCommittedDays > 0) {
-            totalCommittedDays--;
+    public void decrement(String variableName) {
+        switch (variableName) {
+            case "totalCommittedDays":
+                if (totalCommittedDays > 0) {
+                    totalCommittedDays--;
+                }
+                break;
+            case "currentStreak":
+                if (currentStreak > 0) {
+                    currentStreak--;
+                }
+                break;
+            case "highestStreak":
+                if (highestStreak > 0) {
+                    highestStreak--;
+                }
+                break;
         }
     }
 
@@ -99,5 +128,18 @@ public class Habit {
      */
     public Date getStartDate() {
         return startDate;
+    }
+
+    /*
+     * EFFECTS: return currentStreak
+     */
+    public int getCurrentStreak() {
+        return currentStreak;
+    }
+    /*
+     * EFFECTS: return highestStreak
+     */
+    public int getHighestStreak() {
+        return highestStreak;
     }
 }

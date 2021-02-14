@@ -8,11 +8,11 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HabitTest {
-    private String habitName;       //name of the habit
-    private int commitmentTarget;   //number of days to commit per month
-    private int progress;           //counter: number of days committed
-    private Date startDate;         //start date i.e. the date habit was added
+    private String habitName;           //name of the habit
+    private int commitmentTarget;       //number of days to commit per month
+    private Date startDate;             //start date i.e. the date habit was added
     private Habit running;
+    private String variableName;
 
     @BeforeEach
     public void setup() {
@@ -42,10 +42,6 @@ public class HabitTest {
         assertEquals(commitmentTarget, running.getCommitmentTarget());
     }
 
-    //TODO: if it was decided to keep setProgress method, implement the test suite for it
-    //@Test
-    //public void testSetProgress() {}
-
     @Test
     public void testSetStartDate() {
         startDate = new Date();
@@ -54,26 +50,104 @@ public class HabitTest {
     }
 
     @Test
+    public void testResetProgress() {
+        variableName = "totalCommittedDays";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        variableName = "currentStreak";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        variableName = "highestStreak";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        running.resetProgress();
+        assertEquals(0, running.getTotalCommittedDays());
+        assertEquals(0, running.getCurrentStreak());
+        assertEquals(0, running.getHighestStreak());
+    }
+
+    @Test
     public void testIncrementTotalCommittedDays() {
-        running.incrementTotalCommittedDays();
+        variableName = "totalCommittedDays";
+
+        running.increment(variableName);
         assertEquals(1, running.getTotalCommittedDays());
-        running.incrementTotalCommittedDays();
+
+        running.increment(variableName);
         assertEquals(2, running.getTotalCommittedDays());
     }
 
     @Test
-    public void testDecrementTotalCommittedDays() {
-        running.incrementTotalCommittedDays();
-        running.incrementTotalCommittedDays();
+    public void testIncrementCurrentStreak() {
+        variableName = "currentStreak";
 
-        running.decrementTotalCommittedDays();
+        running.increment(variableName);
+        assertEquals(1, running.getCurrentStreak());
+
+        running.increment(variableName);
+        assertEquals(2, running.getCurrentStreak());
+    }
+
+    @Test
+    public void testIncrementHighestStreak() {
+        variableName = "highestStreak";
+
+        running.increment(variableName);
+        assertEquals(1, running.getHighestStreak());
+
+        running.increment(variableName);
+        assertEquals(2, running.getHighestStreak());
+    }
+
+    @Test
+    public void testDecrementTotalCommittedDays() {
+        variableName = "totalCommittedDays";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        running.decrement(variableName);
         assertEquals(1, running.getTotalCommittedDays());
 
-        running.decrementTotalCommittedDays();
+        running.decrement(variableName);
         assertEquals(0, running.getTotalCommittedDays());
 
-        running.decrementTotalCommittedDays();
+        running.decrement(variableName);
         assertEquals(0, running.getTotalCommittedDays());
+    }
+
+    @Test
+    public void testDecrementCurrentStreak() {
+        variableName = "currentStreak";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        running.decrement(variableName);
+        assertEquals(1, running.getCurrentStreak());
+
+        running.decrement(variableName);
+        assertEquals(0, running.getCurrentStreak());
+
+        running.decrement(variableName);
+        assertEquals(0, running.getCurrentStreak());
+    }
+
+    @Test
+    public void testDecrementHighestStreak() {
+        variableName = "highestStreak";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        running.decrement(variableName);
+        assertEquals(1, running.getHighestStreak());
+
+        running.decrement(variableName);
+        assertEquals(0, running.getHighestStreak());
+
+        running.decrement(variableName);
+        assertEquals(0, running.getHighestStreak());
     }
 
 

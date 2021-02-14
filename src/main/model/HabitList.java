@@ -35,14 +35,15 @@ public class HabitList {
         return false;   //stub
     }
 
+    //TODO: check whether this method in needed here or not
     /*
      * REQUIRES: listOfHabits contains at least one element
      * MODIFIES: this and Habit
      * EFFECTS:  for each habit in the listOfHabits, the progress is incremented by one
-     */
+
     public void recordProgress(ArrayList<Habit> listOfHabits) {
         //stub
-    }
+    }*/
 
     /*
      * REQUIRES: listOfHabits contains at least one element
