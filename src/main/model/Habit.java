@@ -79,7 +79,11 @@ public class Habit {
     /*
      * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
      * MODIFIES: this
-     * EFFECTS:  increment one of totalCommittedDays, currentStreak, or highestStreak by one
+     * EFFECTS:  if case = "totalCommittedDays", increment totalCommittedDays by one;
+     *           else if case = "currentStreak" increment currentStreak by one and
+     *           if currentStreak > highestStreak then:
+     *              - set highestStreak = currentStreak
+     *              - set streaksIncreasingTogether = true
      */
     public void increment(String variableName) {
         switch (variableName) {
@@ -99,8 +103,9 @@ public class Habit {
     /*
      * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
      * MODIFIES: this
-     * EFFECTS:  decrement one of totalCommittedDays, currentStreak, or highestStreak by one if it is > 0.
-     *           otherwise do nothing
+     * EFFECTS:  if case = "totalCommittedDays" and totalCommittedDays > 0: increment totalCommittedDays by one;
+     *           else if case = "currentStreak" and currentStreak > 0: increment currentStreak by one;
+     *           else if case = "highestStreak" and highestStreak > 0: increment highestStreak by one;
      */
     public void decrement(String variableName) {
         switch (variableName) {
@@ -123,7 +128,7 @@ public class Habit {
     }
 
     /*
-     * EFFECTS: returns a string representation of the habit
+     * EFFECTS: returns a string representation of the habit progress
      */
     @Override
     public String toString() {

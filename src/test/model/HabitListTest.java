@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
@@ -16,7 +19,6 @@ public class HabitListTest {
     int commitmentTarget2;
     Habit reading;
     Habit coding;
-
 
 
     @BeforeEach
@@ -86,10 +88,19 @@ public class HabitListTest {
         assertEquals(false, doesContainHabit);
     }
 
-    //TODO: add test to printSummaryLog
     @Test
     public void testPrintSummaryLog() {
         habitList.addHabit(reading);
-        habitList.addHabit(coding);
+
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        habitList.printSummaryLog(0);
+        assertEquals(reading.toString() + "\n", outContent.toString());
+
+        System.setOut(originalOut);
+
+
     }
 }

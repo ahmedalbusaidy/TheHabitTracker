@@ -17,7 +17,8 @@ public class HabitList {
 
     /*
      * MODIFIES: this
-     * EFFECTS:  add habit to listOfHabits if it does not already exists and return true, otherwise return false
+     * EFFECTS:  add habit to listOfHabits if it does not already exists and return true;
+     *           otherwise return false
      */
     public boolean addHabit(Habit habit) {
         if (!listOfHabits.contains(habit)) {
@@ -29,7 +30,8 @@ public class HabitList {
 
     /*
      * MODIFIES: this
-     * EFFECTS: removes habit from listOfHabits if it exists and return true, otherwise return false
+     * EFFECTS:  removes habit from listOfHabits if it exists and return true;
+     *           otherwise return false
      */
     public boolean removeHabit(Habit habit) {
         if (listOfHabits.contains(habit)) {
@@ -40,7 +42,8 @@ public class HabitList {
     }
 
     /*
-     * EFFECTS: returns true if listOfHabits contains habit, otherwise returns false
+     * EFFECTS:  returns true if listOfHabits contains habit;
+     *           otherwise returns false
      */
     public boolean containsHabit(Habit habit) {
         return listOfHabits.contains(habit);
@@ -48,13 +51,7 @@ public class HabitList {
 
     /*
      * REQUIRES: listOfHabits contains at least one element
-     * EFFECTS:  It prints a log of the habit at index - 1 on listOfHabits. This log includes:
-     *              - habit name
-     *              - current streak
-     *              - highest streak
-     *              - commitment target
-     *              - total committed days
-     *              - days left to reach the target
+     * EFFECTS:  prints summary log of the habit at index = index from listOfHabits
      */
     public void printSummaryLog(int index) {
         Habit habit = listOfHabits.get(index);
