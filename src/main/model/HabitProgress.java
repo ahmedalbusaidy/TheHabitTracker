@@ -7,12 +7,12 @@ import java.util.Date;
  * This class stores a log of the dates committed for each Habit
  */
 public class HabitProgress {
-    private ArrayList<Date> datesCommitted;
-    private boolean isRecorded = false;
+    private ArrayList<Date> datesCommitted;             //list to store log of the dates committed to habit
+    private boolean isRecorded = false;                 //Boolean value to check if habit is recorded
     private boolean isCurrentStreakBroken = false;
 
     /*
-     * EFFECTS: constructs the datesCommitted method
+     * EFFECTS: constructs the datesCommitted ArrayList
      */
     public HabitProgress() {
         datesCommitted = new ArrayList<>();
@@ -20,7 +20,8 @@ public class HabitProgress {
 
     /*
      * MODIFIES: this
-     * EFFECTS: adds the date to datesCommitted list when progress is incremented
+     * EFFECTS: adds the date to datesCommitted list when progress is incremented;
+     *          sets isRecorded = true
      */
     public void addDate(Date date) {
         datesCommitted.add((date));
@@ -52,23 +53,13 @@ public class HabitProgress {
     }
 
     /*
-     * EFFECTS: returns datesCommitted
-     */
-    public ArrayList<Date> getDatesCommitted() {
-        return datesCommitted;
-    }
-
-    /*
      * EFFECTS: returns true if current streak is broken, otherwise return false
      */
     public boolean isCurrentStreakBroken() {
-
-        if (datesCommitted.size() != 0) {
-            if (getDateDifference() > 1) {
-                isCurrentStreakBroken = true;
-            }
+        if (getDateDifference() > 1) {
+            isCurrentStreakBroken = true;
         }
-        return false;
+        return isCurrentStreakBroken;
     }
 
     /*
@@ -78,10 +69,17 @@ public class HabitProgress {
         double numberOfMilliSecondsInDay = 8.64e+7;
         long diffInDays = 0;
         if (datesCommitted.size() != 0) {
-            diffInDays = Math.round((new Date().getTime() - datesCommitted.get(datesCommitted.size() - 1).getTime())
-                    / numberOfMilliSecondsInDay);
+            diffInDays = ((new Date().getTime() - datesCommitted.get(datesCommitted.size() - 1).getTime())
+                    / (1000 * 60 * 60 * 24)) % 365;
         }
         return diffInDays;
+    }
+
+    /*
+     * EFFECTS: returns datesCommitted
+     */
+    public ArrayList<Date> getDatesCommitted() {
+        return datesCommitted;
     }
 
 }
