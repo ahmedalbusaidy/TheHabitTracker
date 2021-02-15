@@ -30,6 +30,7 @@ public class HabitTest {
         assertEquals(habitName, running.getHabitName());
         assertEquals(commitmentTarget, running.getCommitmentTarget());
         assertEquals(0, running.getTotalCommittedDays());
+        assertFalse(running.getStreaksIncreasingTogether());
     }
 
     @Test
@@ -51,6 +52,12 @@ public class HabitTest {
         startDate = new Date();
         running.setStartDate(startDate);
         assertEquals(startDate, running.getStartDate());
+    }
+
+    @Test
+    public void testSetCurrentStreak() {
+        running.setCurrentStreak(5);
+        assertEquals(5, running.getCurrentStreak());
     }
 
     @Test
@@ -87,26 +94,46 @@ public class HabitTest {
     }
 
     @Test
-    public void testIncrementCurrentStreak() {
+    public void testIncrementCurrentStreakGreaterThanHighestStreak() {
         variableName = "currentStreak";
 
         running.increment(variableName);
         assertEquals(1, running.getCurrentStreak());
+        assertEquals(1, running.getHighestStreak());
+        assertTrue(running.streaksIncreasingTogether);
 
         running.increment(variableName);
         assertEquals(2, running.getCurrentStreak());
+        assertEquals(2, running.getHighestStreak());
+        assertTrue(running.streaksIncreasingTogether);
     }
 
     @Test
-    public void testIncrementHighestStreak() {
-        variableName = "highestStreak";
+    public void testIncrementCurrentStreakLessThanOrEqualToHighestStreak() {
+        variableName = "currentStreak";
 
         running.increment(variableName);
-        assertEquals(1, running.getHighestStreak());
+        running.increment(variableName);
+        running.increment(variableName);
+
+        running.setCurrentStreak(0);
+        running.increment(variableName);
+        assertEquals(1, running.getCurrentStreak());
+        assertEquals(3, running.getHighestStreak());
 
         running.increment(variableName);
-        assertEquals(2, running.getHighestStreak());
+        assertEquals(2, running.getCurrentStreak());
+        assertEquals(3, running.getHighestStreak());
+
+        running.increment(variableName);
+        assertEquals(3, running.getCurrentStreak());
+        assertEquals(3, running.getHighestStreak());
+
+        running.increment(variableName);
+        assertEquals(4, running.getCurrentStreak());
+        assertEquals(4, running.getHighestStreak());
     }
+
 
     @Test
     public void testDecrementTotalCommittedDays() {
@@ -142,10 +169,11 @@ public class HabitTest {
 
     @Test
     public void testDecrementHighestStreak() {
-        variableName = "highestStreak";
+        variableName = "currentStreak";
         running.increment(variableName);
         running.increment(variableName);
 
+        variableName = "highestStreak";
         running.decrement(variableName);
         assertEquals(1, running.getHighestStreak());
 
@@ -159,7 +187,7 @@ public class HabitTest {
     @Test
     public void testToString() {
         assertTrue(running.toString().contains("running                  0                  0                  "
-                                                + "30         0                  30            "));
+                + "30         0                  30            "));
     }
 
 

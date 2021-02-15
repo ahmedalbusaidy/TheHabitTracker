@@ -1,5 +1,6 @@
 //TODO: Maybe I'll need small introductory paragraphs explaining the functions (add/record/reset ..) before the options
 //TODO: add reference to TellerApp
+//TODO: Current streak resets to zero when the difference between the last two records is 2 days
 
 package ui;
 
@@ -13,6 +14,7 @@ public class HabitTrackerApp {
     private Scanner input;
     private HabitList habitList = new HabitList();
     boolean isRecorded = false;
+    boolean isAnotherDay = false;
 
     // EFFECTS: runs the tracker application
     public HabitTrackerApp() {
@@ -28,11 +30,12 @@ public class HabitTrackerApp {
 
         System.out.println("\nWelcome: " + System.getProperty("user.name"));
         System.out.println("\nNow you can track your habits easily using The Habit Tracker, where you can add new"
-                            + "\nhabits to your list, set a commitment target, display your progress and much more!"
-                            + "\nHabit Tracking never been easier before!");
+                + "\nhabits to your list, set a commitment target, display your progress and much more!"
+                + "\nHabit Tracking never been easier before!");
         while (keepGoing) {
             displayMenu();
             command = input.next();
+            updateCurrentStreak();
 
             if (command.toLowerCase().equals("q")) {
                 keepGoing = false;
@@ -83,7 +86,7 @@ public class HabitTrackerApp {
                 deleteHabit();
                 break;
             default:
-                System.out.println("Selection not valid...");
+                System.out.println("\nSelection not valid...");
                 break;
         }
     }
@@ -102,7 +105,7 @@ public class HabitTrackerApp {
         Habit habit = processGettingCommitmentTarget(habitName);
         System.out.printf("\nYour habit is successfully added to the habit list:"
                         + "%nHabit: %s%nTarget: %d days%nStart Date: %tA %<tB %<te, %<tY%n",
-                          habit.getHabitName(), habit.getCommitmentTarget(), habit.getStartDate());
+                habit.getHabitName(), habit.getCommitmentTarget(), habit.getStartDate());
     }
 
     //MODIFIES: this
@@ -110,18 +113,18 @@ public class HabitTrackerApp {
     public void recordModifyProgress() {
         printListOfHabits();
         System.out.println("\nChoose the habits that you want to record/modify their progress."
-                            + " (Please separate the numbers with a space)"
-                            + "\nNote: this will modify all of the listed habits");
+                + " (Please separate the numbers with a space)"
+                + "\nNote: this will modify all of the listed habits");
 
         String userInput1 = printOutUserSelectionFromHabitList();
 
-        if (isRecorded) {
+        if (!isRecorded || isAnotherDay) {
             System.out.println("Choose one option:\n"
-                    + "\tN -> 'not' done, change your today's progress to incomplete\n"
+                    + "\tD -> 'done', mark your today's progress as completed\n"
                     + "\tC -> 'cancel' and return to the main menu\n");
         } else {
             System.out.println("Choose one option:\n"
-                    + "\tD -> 'done', mark your today's progress as completed\n"
+                    + "\tN -> 'not' done, change your today's progress to incomplete\n"
                     + "\tC -> 'cancel' and return to the main menu\n");
         }
 
@@ -159,7 +162,7 @@ public class HabitTrackerApp {
         input = new Scanner(System.in);
         String userInput = input.nextLine();
         System.out.printf("%-6s%-25s%-19s%-19s%-11s%-19s%-14s%n", "#", "Habit Name", "Current Streak",
-                            "Highest Streak", "Target", "Total Progress", "Days left");
+                "Highest Streak", "Target", "Total Progress", "Days left");
 
         String dashes = new String(new char[113]).replace("\0", "-");
         System.out.println(dashes);
@@ -235,6 +238,9 @@ public class HabitTrackerApp {
                 habit.increment("currentStreak");
                 habit.getHabitProgress().addDate(new Date());
                 isRecorded = habit.getHabitProgress().isRecorded();
+                if (habit.getHabitProgress().getDateDifference() > 0) {
+                    isAnotherDay = true;
+                }
             }
             System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("n")) {
@@ -242,9 +248,15 @@ public class HabitTrackerApp {
             for (String s : command1.split(" ")) {
                 Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
                 //TODO: check on after modifying decrement method
-                habit.decrement("totalCommittedDays");
-                habit.decrement("currentStreak");
-                habit.getHabitProgress().removeDate();
+                if (habit.getHabitProgress().isRecorded()) {
+                    habit.decrement("totalCommittedDays");
+                    habit.decrement("currentStreak");
+                    if (habit.getStreaksIncreasingTogether()) {
+                        habit.decrement("highestStreak");
+                    }
+                    habit.getHabitProgress().removeDate();
+                    isRecorded = habit.getHabitProgress().isRecorded();
+                }
             }
             System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("c")) {
@@ -293,12 +305,22 @@ public class HabitTrackerApp {
         input = new Scanner(System.in);
         String userInput1 = input.nextLine();
         int i = 1;
-        System.out.println("You selected:");
+        System.out.println("\nYou selected:");
         for (String s : userInput1.split(" ")) {
             System.out.print("\t" + i + ". ");
             System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
             i++;
         }
         return userInput1;
+    }
+
+    //EFFECTS: sets the current streak of each habit in the list to 0 if the current streak is broken;
+    //         otherwise do nothing
+    private void updateCurrentStreak() {
+        for (Habit habit : habitList.getListOfHabits()) {
+            if (habit.getHabitProgress().isCurrentStreakBroken()) {
+                habit.setCurrentStreak(0);
+            }
+        }
     }
 }

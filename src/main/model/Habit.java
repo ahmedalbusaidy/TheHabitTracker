@@ -13,21 +13,23 @@ public class Habit {
     private int highestStreak;              //the highest streak of committed days in a row
     private Date startDate = new Date();    //start date i.e. the date habit was added
     private HabitProgress habitProgress;    //keep track of the progress by dates
-
-
-    //TODO: how to track the streaks?
+    boolean streaksIncreasingTogether;      //Keep track if the two streaks are increasing together
 
     /*
      * REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
      * MODIFIES: HabitProgress
-     * EFFECTS:  name of the habit is set to habitName; commitment target is set to commitmentTarget;
-     *           totalCommittedDays is set to zero; constructs HabitProgress object to store habit progress
+     * EFFECTS:  name of the habit is set to habitName;
+     *           commitment target is set to commitmentTarget;
+     *           totalCommittedDays is set to zero;
+     *           constructs HabitProgress object to store habit progress;
+     *           sets streaksIncreasingTogether = false
      */
     public Habit(String habitName, int commitmentTarget) {
         this.habitName = habitName;
         this.commitmentTarget = commitmentTarget;
         totalCommittedDays = 0;
         habitProgress = new HabitProgress();
+        streaksIncreasingTogether = false;
     }
 
     /*
@@ -56,7 +58,16 @@ public class Habit {
     }
 
     /*
+     * MODIFIES: this
+     * EFFECTS:  sets currentStreak to streak
+     */
+    public void setCurrentStreak(int streak) {
+        currentStreak = streak;
+    }
+
+    /*
      * EFFECTS:  resets totalCommittedDays, currentStreak, and highestStreak to zero;
+     *           sets the date to today's date
      */
     public void resetProgress() {
         totalCommittedDays = 0;
@@ -79,6 +90,7 @@ public class Habit {
                 currentStreak++;
                 if (currentStreak > highestStreak) {
                     highestStreak = currentStreak;
+                    streaksIncreasingTogether = true;
                 }
                 break;
         }
@@ -105,7 +117,6 @@ public class Habit {
             case "highestStreak":
                 if (highestStreak > 0) {
                     highestStreak--;
-                    //TODO: decrementing after incrementing
                 }
                 break;
         }
@@ -118,7 +129,7 @@ public class Habit {
     public String toString() {
         int daysToTarget = commitmentTarget - totalCommittedDays;
         String habitStr = String.format("%-25s%-19d%-19d%-11d%-19d%-14d", habitName, currentStreak,
-                                        highestStreak, commitmentTarget, totalCommittedDays, daysToTarget);
+                highestStreak, commitmentTarget, totalCommittedDays, daysToTarget);
         return habitStr;
     }
 
@@ -169,5 +180,12 @@ public class Habit {
      */
     public HabitProgress getHabitProgress() {
         return habitProgress;
+    }
+
+    /*
+     * EFFECTS: returns streaksIncreasingTogether
+     */
+    public boolean getStreaksIncreasingTogether() {
+        return streaksIncreasingTogether;
     }
 }

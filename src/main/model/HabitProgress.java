@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.tools.javac.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +8,8 @@ import java.util.Date;
  */
 public class HabitProgress {
     private ArrayList<Date> datesCommitted;
-    boolean isRecorded = false;
+    private boolean isRecorded = false;
+    private boolean isCurrentStreakBroken = false;
 
     /*
      * EFFECTS: constructs the datesCommitted method
@@ -43,7 +42,11 @@ public class HabitProgress {
      */
     public boolean isRecorded() {
         String dateOfToday = String.format("%tA %<tB %<te, %<tY%n", new Date());
-        String dateLastRecorded = String.format("%tA %<tB %<te, %<tY%n", datesCommitted.get(datesCommitted.size() - 1));
+        String dateLastRecorded = "";
+        if (datesCommitted.size() != 0) {
+            dateLastRecorded = String.format("%tA %<tB %<te, %<tY%n",
+                    datesCommitted.get(datesCommitted.size() - 1));
+        }
 
         return dateLastRecorded.equals(dateOfToday);
     }
@@ -55,4 +58,31 @@ public class HabitProgress {
         return datesCommitted;
     }
 
+    /*
+     * EFFECTS: returns true if current streak is broken, otherwise return false
+     */
+    public boolean isCurrentStreakBroken() {
+
+        if (datesCommitted.size() != 0) {
+            if (getDateDifference() > 1) {
+                isCurrentStreakBroken = true;
+            }
+        }
+        return false;
+    }
+
+    /*
+     * EFFECTS: returns the number of days difference between two dates
+     */
+    public long getDateDifference() {
+        double numberOfMilliSecondsInDay = 8.64e+7;
+        long diffInDays = 0;
+        if (datesCommitted.size() != 0) {
+            diffInDays = Math.round((new Date().getTime() - datesCommitted.get(datesCommitted.size() - 1).getTime())
+                    / numberOfMilliSecondsInDay);
+        }
+        return diffInDays;
+    }
+
 }
+
