@@ -18,6 +18,8 @@ public class HabitTrackerApp {
         runTracker();
     }
 
+    // Prats of this method were taken from the Teller application
+    // URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runTracker() {
@@ -44,6 +46,8 @@ public class HabitTrackerApp {
         System.out.println("\nGoodbye!");
     }
 
+    // Prats of this method were taken from the Teller application
+    // URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         if (habitList.getListOfHabits().size() == 0) {
@@ -63,6 +67,8 @@ public class HabitTrackerApp {
 
     }
 
+    // Prats of this method were taken from the Teller application
+    // URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {

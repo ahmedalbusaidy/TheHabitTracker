@@ -43,3 +43,6 @@ committed days, and maximum commitments in a row
 - As a user, I want to be able to see a confirmation dialog before deleting a habit or resetting its progress
 (for example: "Are you sure you want to permanently delete/reset this habit?")
 
+### Reference
+Teller Application
+URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
