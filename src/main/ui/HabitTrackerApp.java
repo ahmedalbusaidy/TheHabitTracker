@@ -1,6 +1,3 @@
-//TODO: Maybe I'll need small introductory paragraphs explaining the functions (add/record/reset ..) before the options
-//TODO: add reference to TellerApp
-//TODO: Current streak resets to zero when the difference between the last two records is 2 days
 
 package ui;
 
@@ -246,23 +243,26 @@ public class HabitTrackerApp {
         } else if (command2.toLowerCase().equals("n")) {
 
             for (String s : command1.split(" ")) {
-                Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
-                //TODO: check on after modifying decrement method
-                if (habit.getHabitProgress().isRecorded()) {
-                    habit.decrement("totalCommittedDays");
-                    habit.decrement("currentStreak");
-                    if (habit.getStreaksIncreasingTogether()) {
-                        habit.decrement("highestStreak");
-                    }
-                    habit.getHabitProgress().removeDate();
-                    isRecorded = habit.getHabitProgress().isRecorded();
-                }
+                proccessRecordHabitNotRecorded(s);
             }
             System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("c")) {
             System.out.println("\nCancelled...");
         } else {
             System.out.println("\nSelection not valid...");
+        }
+    }
+
+    private void proccessRecordHabitNotRecorded(String s) {
+        Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
+        if (habit.getHabitProgress().isRecorded()) {
+            habit.decrement("totalCommittedDays");
+            habit.decrement("currentStreak");
+            if (habit.getStreaksIncreasingTogether()) {
+                habit.decrement("highestStreak");
+            }
+            habit.getHabitProgress().removeDate();
+            isRecorded = habit.getHabitProgress().isRecorded();
         }
     }
 

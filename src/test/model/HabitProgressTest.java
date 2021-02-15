@@ -83,6 +83,5 @@ public class HabitProgressTest {
         assertEquals(2, habit1.getHabitProgress().getDateDifference());
 
 
-
     }
 }
