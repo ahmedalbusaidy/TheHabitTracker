@@ -103,9 +103,9 @@ public class Habit {
     /*
      * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
      * MODIFIES: this
-     * EFFECTS:  if case = "totalCommittedDays" and totalCommittedDays > 0: increment totalCommittedDays by one;
-     *           else if case = "currentStreak" and currentStreak > 0: increment currentStreak by one;
-     *           else if case = "highestStreak" and highestStreak > 0: increment highestStreak by one;
+     * EFFECTS:  if case = "totalCommittedDays" and totalCommittedDays > 0: decrement totalCommittedDays by one;
+     *           else if case = "currentStreak" and currentStreak > 0: decrement currentStreak by one;
+     *           else if case = "highestStreak" and highestStreak > 0: decrement highestStreak by one;
      */
     public void decrement(String variableName) {
         switch (variableName) {
