@@ -42,6 +42,11 @@ committed days, and maximum commitments in a row
 - As a user, I want to be able to reset a single habit's progress to zero
 - As a user, I want to be able to see a confirmation dialog before deleting a habit or resetting its progress
 (for example: "Are you sure you want to permanently delete/reset this habit?")
+- As a user, I want to be able to save my habit list to file
+- As a user, I want to be able to be able to load my habit list from file
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my habit list to
+file and have the option to do so or not
+- As a user, when I start the application, I want to be given the option to load my habit list from file
 
 ### Reference
 Teller Application
