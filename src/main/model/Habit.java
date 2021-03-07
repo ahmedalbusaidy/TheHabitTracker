@@ -1,11 +1,16 @@
+//TODO: replace java.Date with java.time in the whole project
+
 package model;
+
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.Date;
 
 /*
  * This class represents a habit and its attributes
  */
-public class Habit {
+public class Habit implements Writable {
     private String habitName;               //name of the habit
     private int commitmentTarget;           //number of days to commit per month
     private int totalCommittedDays;         //counter: total number of days committed
@@ -229,4 +234,21 @@ public class Habit {
     public boolean getStreaksIncreasingTogether() {
         return streaksIncreasingTogether;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("habitName", habitName);
+        json.put("commitmentTarget", commitmentTarget);
+        json.put("totalCommittedDays", totalCommittedDays);
+        json.put("currentStreak", currentStreak);
+        json.put("highestStreak", highestStreak);
+        json.put("startDateInMilliseconds", startDate.getTime());
+        json.put("commitmentTarget", commitmentTarget);
+        json.put("streaksIncreasingTogether", streaksIncreasingTogether);
+        json.put("habitProgress", habitProgress.toJson());
+        return json;
+    }
+
+
 }

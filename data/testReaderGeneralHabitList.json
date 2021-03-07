@@ -1,0 +1,30 @@
+{"listOfHabits": [
+  {
+    "currentStreak": 2,
+    "streaksIncreasingTogether": true,
+    "totalCommittedDays": 2,
+    "habitProgress": {
+      "datesCommitted": [],
+      "isCurrentStreakBroken": false,
+      "isRecorded": false
+    },
+    "highestStreak": 2,
+    "commitmentTarget": 30,
+    "habitName": "reading",
+    "startDateInMilliseconds": 1614931200000
+  },
+  {
+    "currentStreak": 3,
+    "streaksIncreasingTogether": true,
+    "totalCommittedDays": 3,
+    "habitProgress": {
+      "datesCommitted": [],
+      "isCurrentStreakBroken": false,
+      "isRecorded": false
+    },
+    "highestStreak": 3,
+    "commitmentTarget": 20,
+    "habitName": "running",
+    "startDateInMilliseconds": 1614844800000
+  }
+]}

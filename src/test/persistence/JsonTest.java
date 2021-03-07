@@ -7,6 +7,8 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// Class is modelled on the code from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonTest {
     protected void checkHabit(String habitName, int commitmentTarget, int totalCommittedDays,
                               int currentStreak, int highestStreak, Date startDate, HabitProgress habitProgress,

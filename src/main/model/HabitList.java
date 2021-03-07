@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 /*
  * This class represents the list of habits
  */
-public class HabitList {
+public class HabitList implements Writable {
     private ArrayList<Habit> listOfHabits;  //list containing all of the habits
 
     /*
@@ -56,6 +60,24 @@ public class HabitList {
     public void printSummaryLog(int index) {
         Habit habit = listOfHabits.get(index);
         System.out.println(habit.toString());
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("listOfHabits", listOfHabitsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns habits in this listOfHabits as a JSON array
+    private JSONArray listOfHabitsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Habit h : listOfHabits) {
+            jsonArray.put(h.toJson());
+        }
+
+        return jsonArray;
     }
 
     /*

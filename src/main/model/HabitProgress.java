@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 /*
  * This class stores a log of the dates committed for each Habit
  */
-public class HabitProgress {
+public class HabitProgress implements Writable {
     private ArrayList<Date> datesCommitted;             //list to store log of the dates committed to habit
     private boolean isRecorded = false;                 //Boolean value to check if habit is recorded
     private boolean isCurrentStreakBroken = false;
@@ -98,6 +102,28 @@ public class HabitProgress {
      */
     public ArrayList<Date> getDatesCommitted() {
         return datesCommitted;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("isRecorded", isRecorded);
+        json.put("isCurrentStreakBroken", isCurrentStreakBroken);
+        json.put("datesCommitted", datesCommittedToJson());
+        return json;
+    }
+
+    // EFFECTS: returns datesCommitted for this habit as a JSON array
+    private JSONArray datesCommittedToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        int i = 0;
+        for (Date d : datesCommitted) {
+            jsonArray.put(i, d);
+            i++;
+        }
+
+        return jsonArray;
     }
 
 }
