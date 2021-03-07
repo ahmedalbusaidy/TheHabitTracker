@@ -49,5 +49,12 @@ file and have the option to do so or not
 - As a user, when I start the application, I want to be given the option to load my habit list from file
 
 ### Reference
-Teller Application
+1- Teller Application
+
 URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+
+
+2- JsonSerializationDemo
+
+URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+

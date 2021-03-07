@@ -18,6 +18,24 @@ public class HabitProgress {
         datesCommitted = new ArrayList<>();
     }
 
+    //TODO: Newly added method, check if testing is needed
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets isRecorded to bool
+     */
+    public void setIsRecorded(boolean bool) {
+        this.isRecorded = bool;
+    }
+
+    //TODO: Newly added method, check if testing is needed
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets isCurrentStreakBroken to bool
+     */
+    public void setIsCurrentStreakBroken(boolean bool) {
+        this.isCurrentStreakBroken = bool;
+    }
+
     /*
      * MODIFIES: this
      * EFFECTS: adds the date to datesCommitted list when progress is incremented;

@@ -49,12 +49,13 @@ public class Habit {
         this.commitmentTarget = commitmentTarget;
     }
 
+    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
-     * EFFECTS:  sets startDate to current date
+     * EFFECTS:  sets totalCommittedDays to streak
      */
-    public void setStartDate(Date date) {
-        startDate = date;
+    public void setTotalCommittedDays(int totalCommittedDays) {
+        this.totalCommittedDays = totalCommittedDays;
     }
 
     /*
@@ -62,7 +63,42 @@ public class Habit {
      * EFFECTS:  sets currentStreak to streak
      */
     public void setCurrentStreak(int streak) {
-        currentStreak = streak;
+        this.currentStreak = streak;
+    }
+
+    //TODO: Newly added method, check if testing is needed
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets highestStreak to streak
+     */
+    public void setHighestStreak(int streak) {
+        this.highestStreak = streak;
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets startDate to date
+     */
+    public void setStartDate(Date date) {
+        startDate = date;
+    }
+
+    //TODO: Newly added method, check if testing is needed
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets habitProgress to habitProgress
+     */
+    public void setHabitProgress(HabitProgress habitProgress) {
+        this.habitProgress = habitProgress;
+    }
+
+    //TODO: Newly added method, check if testing is needed
+    /*
+     * MODIFIES: this
+     * EFFECTS:  sets streaksIncreasingTogether to bool
+     */
+    public void setStreaksIncreasingTogether(boolean bool) {
+        this.streaksIncreasingTogether = bool;
     }
 
     /*
