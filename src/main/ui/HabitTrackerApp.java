@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class HabitTrackerApp {
     private Scanner input;
     private HabitList habitList = new HabitList();
-    boolean isRecorded = false;
     boolean isAnotherDay = false;
 
     // EFFECTS: runs the tracker application
@@ -121,15 +120,10 @@ public class HabitTrackerApp {
 
         String userInput1 = printOutUserSelectionFromHabitList();
 
-        if (!isRecorded || isAnotherDay) {
-            System.out.println("Choose one option:\n"
-                    + "\tD -> 'done', mark your today's progress as completed\n"
-                    + "\tC -> 'cancel' and return to the main menu\n");
-        } else {
-            System.out.println("Choose one option:\n"
-                    + "\tN -> 'not' done, change your today's progress to incomplete\n"
-                    + "\tC -> 'cancel' and return to the main menu\n");
-        }
+        System.out.println("Choose one option:\n"
+                + "\tD -> 'done', mark your today's progress as completed\n"
+                + "\tN -> 'not' done, change your today's progress to incomplete\n"
+                + "\tC -> 'cancel' and return to the main menu\n");
 
         input = new Scanner(System.in);
         String userInput2 = input.next();
@@ -164,6 +158,7 @@ public class HabitTrackerApp {
                 + " (Please separate the numbers with a space)");
         input = new Scanner(System.in);
         String userInput = input.nextLine();
+        userInput = validateUserInputInSelectionFromList(userInput, 1);
         System.out.printf("%-6s%-25s%-19s%-19s%-11s%-19s%-14s%n", "#", "Habit Name", "Current Streak",
                 "Highest Streak", "Target", "Total Progress", "Days left");
 
@@ -237,19 +232,16 @@ public class HabitTrackerApp {
         if (command2.toLowerCase().equals("d")) {
             for (String s : command1.split(" ")) {
                 Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
-                habit.increment("totalCommittedDays");
-                habit.increment("currentStreak");
-                habit.getHabitProgress().addDate(new Date());
-                isRecorded = habit.getHabitProgress().isRecorded();
-                if (habit.getHabitProgress().getDateDifference() > 0) {
-                    isAnotherDay = true;
+                if (!habit.getHabitProgress().isRecorded()) {
+                    habit.increment("totalCommittedDays");
+                    habit.increment("currentStreak");
+                    habit.getHabitProgress().addDate(new Date());
                 }
             }
             System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("n")) {
-
             for (String s : command1.split(" ")) {
-                proccessRecordHabitNotRecorded(s);
+                processRecordHabitNotRecorded(s);
             }
             System.out.println("\nYour progress has been recorded successfully!");
         } else if (command2.toLowerCase().equals("c")) {
@@ -259,7 +251,9 @@ public class HabitTrackerApp {
         }
     }
 
-    private void proccessRecordHabitNotRecorded(String s) {
+    //MODIFIES: this
+    //EFFECTS:  processes user command from recordModifyProgress method if user selected "n"
+    private void processRecordHabitNotRecorded(String s) {
         Habit habit = habitList.getListOfHabits().get(Integer.parseInt(s) - 1);
         if (habit.getHabitProgress().isRecorded()) {
             habit.decrement("totalCommittedDays");
@@ -268,7 +262,6 @@ public class HabitTrackerApp {
                 habit.decrement("highestStreak");
             }
             habit.getHabitProgress().removeDate();
-            isRecorded = habit.getHabitProgress().isRecorded();
         }
     }
 
@@ -311,10 +304,30 @@ public class HabitTrackerApp {
         input = new Scanner(System.in);
         String userInput1 = input.nextLine();
         int i = 1;
+        userInput1 = validateUserInputInSelectionFromList(userInput1, i);
         System.out.println("\nYou selected:");
         for (String s : userInput1.split(" ")) {
             System.out.print("\t" + i + ". ");
             System.out.println(habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName());
+            i++;
+        }
+        return userInput1;
+    }
+
+    // Effects: handles exceptions if user entered invalid entry when selecting from list of habits
+    private String validateUserInputInSelectionFromList(String userInput1, int i) {
+        boolean done = false;
+        while (!done) {
+            try {
+                for (String s : userInput1.split(" ")) {
+                    habitList.getListOfHabits().get(Integer.parseInt(s) - 1).getHabitName();
+                }
+                done = true;
+            } catch (Exception exception) {
+                System.out.println("Please enter a valid entry, i.e. numbers separated by a space");
+                input = new Scanner(System.in);
+                userInput1 = input.nextLine();
+            }
             i++;
         }
         return userInput1;
