@@ -88,10 +88,11 @@ public class JsonReader {
         boolean isRecorded = jsonObject.getBoolean("isRecorded");
         boolean isCurrentStreakBroken = jsonObject.getBoolean("isCurrentStreakBroken");
         HabitProgress habitProgress = new HabitProgress();
-        JSONArray jsonArray = jsonObject.getJSONArray("datesCommitted");
-        for (Object json : jsonArray) {
-            JSONObject nextDateCommitted = (JSONObject) json;
-            Date dateCommitted = new Date(nextDateCommitted.getLong("dateCommittedInMilliseconds"));
+
+        JSONArray datesCommitted = jsonObject.getJSONArray("datesCommitted");
+
+        for (int i = 0; i < datesCommitted.length(); i++) {
+            Date dateCommitted = new Date(datesCommitted.getLong(i));
             habitProgress.getDatesCommitted().add(dateCommitted);
         }
 

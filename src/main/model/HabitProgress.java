@@ -119,7 +119,7 @@ public class HabitProgress implements Writable {
 
         int i = 0;
         for (Date d : datesCommitted) {
-            jsonArray.put(i, d);
+            jsonArray.put(i, d.getTime());
             i++;
         }
 

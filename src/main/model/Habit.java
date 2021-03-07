@@ -1,4 +1,5 @@
 //TODO: replace java.Date with java.time in the whole project
+//TODO: delete the additional user stories if will not be implemented
 
 package model;
 

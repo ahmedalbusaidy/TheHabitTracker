@@ -3,17 +3,28 @@ package ui;
 
 import model.Habit;
 import model.HabitList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
 public class HabitTrackerApp {
+    private static final String JSON_STORE = "./data/habitTracker.json";
     private Scanner input;
-    private HabitList habitList = new HabitList();
-    boolean isAnotherDay = false;
+    private HabitList habitList;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
     // EFFECTS: runs the tracker application
-    public HabitTrackerApp() {
+    public HabitTrackerApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        habitList = new HabitList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runTracker();
     }
 
@@ -45,14 +56,18 @@ public class HabitTrackerApp {
         System.out.println("\nGoodbye!");
     }
 
-    // Prats of this method were taken from the Teller application
-    // URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+    // Prats of this method were taken from TellerApp, and JsonSerializationDemo
+    // URLs:
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         if (habitList.getListOfHabits().size() == 0) {
             System.out.println("\nChoose an option to continue with:");
 
             System.out.println("\t1 -> add a new habit");
+            System.out.println("\ts -> save habits list to file");
+            System.out.println("\tl -> load habits list from file");
             System.out.println("\tQ -> quit");
         } else {
             System.out.println("\nChoose an option to continue with:");
@@ -61,6 +76,8 @@ public class HabitTrackerApp {
             System.out.println("\t3 -> reset progress");
             System.out.println("\t4 -> print summary log");
             System.out.println("\t5 -> delete habit");
+            System.out.println("\ts -> save habits list to file");
+            System.out.println("\tl -> load habits list from file");
             System.out.println("\tQ -> quit");
         }
 
@@ -86,6 +103,12 @@ public class HabitTrackerApp {
                 break;
             case "5":
                 deleteHabit();
+                break;
+            case "s":
+                saveHabitsList();
+                break;
+            case "l":
+                loadHabitsList();
                 break;
             default:
                 System.out.println("\nSelection not valid...");
@@ -187,6 +210,29 @@ public class HabitTrackerApp {
         input = new Scanner(System.in);
         String userInput2 = input.next();
         processDeleteHabitCommand(userInput1, userInput2);
+    }
+
+    // EFFECTS: saves the habits list to file
+    private void saveHabitsList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(habitList);
+            jsonWriter.close();
+            System.out.println("Saved your habits list to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads the habits list from file
+    private void loadHabitsList() {
+        try {
+            habitList = jsonReader.read();
+            System.out.println("Loaded your habits list from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     //REQUIRES: habitName to not be an empty string
