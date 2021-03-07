@@ -65,6 +65,7 @@ public class HabitProgressTest {
         habit1.getHabitProgress().getDateDifference();
         assertFalse(habit1.getHabitProgress().isCurrentStreakBroken());
 
+        //TODO: Check if test still works
         habit1.getHabitProgress().addDate(new Date(2021 - 1900, 1, 12));
         assertTrue(habit1.getHabitProgress().isCurrentStreakBroken());
     }
@@ -79,6 +80,7 @@ public class HabitProgressTest {
         habit1.getHabitProgress().addDate(date);
         assertEquals(0, habit1.getHabitProgress().getDateDifference());
 
+        //TODO: Check if test still works
         habit1.getHabitProgress().addDate(new Date(2021 - 1900, 1, 12));
         assertEquals(2, habit1.getHabitProgress().getDateDifference());
 
