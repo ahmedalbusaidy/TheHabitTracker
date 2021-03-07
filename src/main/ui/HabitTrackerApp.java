@@ -89,29 +89,21 @@ public class HabitTrackerApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         switch (command) {
-            case "1":
-                addHabit();
+            case "1": addHabit();
                 break;
-            case "2":
-                recordModifyProgress();
+            case "2": recordModifyProgress();
                 break;
-            case "3":
-                resetProgress();
+            case "3": resetProgress();
                 break;
-            case "4":
-                printLog();
+            case "4": printLog();
                 break;
-            case "5":
-                deleteHabit();
+            case "5": deleteHabit();
                 break;
-            case "s":
-                saveHabitsList();
+            case "s": saveHabitsList();
                 break;
-            case "l":
-                loadHabitsList();
+            case "l": loadHabitsList();
                 break;
-            default:
-                System.out.println("\nSelection not valid...");
+            default: System.out.println("\nSelection not valid...");
                 break;
         }
     }
