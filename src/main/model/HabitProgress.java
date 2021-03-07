@@ -22,7 +22,6 @@ public class HabitProgress implements Writable {
         datesCommitted = new ArrayList<>();
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets isRecorded to bool
@@ -31,7 +30,6 @@ public class HabitProgress implements Writable {
         this.isRecorded = bool;
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets isCurrentStreakBroken to bool
@@ -117,10 +115,8 @@ public class HabitProgress implements Writable {
     private JSONArray datesCommittedToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        int i = 0;
         for (Date d : datesCommitted) {
-            jsonArray.put(i, d.getTime());
-            i++;
+            jsonArray.put(d.getTime());
         }
 
         return jsonArray;
