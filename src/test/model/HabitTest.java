@@ -184,6 +184,25 @@ public class HabitTest {
     }
 
     @Test
+    public void testDecrementNothingTrue() {
+        variableName = "totalCommittedDays";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        variableName = "currentStreak";
+        running.increment(variableName);
+        running.increment(variableName);
+
+        variableName = "nothingTrue";
+        running.decrement(variableName);
+
+        assertEquals(2, running.getTotalCommittedDays());
+        assertEquals(2, running.getCurrentStreak());
+        assertEquals(2, running.getHighestStreak());
+
+    }
+
+    @Test
     public void testToString() {
         assertTrue(running.toString().contains("running                  0                  0                  "
                 + "30         0                  30            "));
