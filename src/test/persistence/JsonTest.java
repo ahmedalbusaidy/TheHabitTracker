@@ -22,7 +22,6 @@ public class JsonTest {
         assertEquals(highestStreak, habit.getHighestStreak());
         assertEquals(habitProgress, habit.getHabitProgress());
         assertEquals(streaksIncreasingTogether, habit.getStreaksIncreasingTogether());
-        //TODO: checkHabitProgress
     }
 
 }

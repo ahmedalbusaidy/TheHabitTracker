@@ -86,7 +86,6 @@ public class HabitProgress implements Writable {
      * EFFECTS: returns the number of days difference between two dates
      */
     public long getDateDifference() {
-        double numberOfMilliSecondsInDay = 8.64e+7;
         long diffInDays = 0;
         if (datesCommitted.size() != 0) {
             diffInDays = ((new Date().getTime() - datesCommitted.get(datesCommitted.size() - 1).getTime())

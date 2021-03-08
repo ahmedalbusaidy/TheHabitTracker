@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.Date;
 
@@ -45,14 +48,14 @@ public class HabitProgressTest {
         habit1.increment("totalCommittedDays");
         habit1.increment("currentStreak");
         habit1.getHabitProgress().addDate(date);
-        assertEquals(true, habit1.getHabitProgress().isRecorded());
+        assertTrue(habit1.getHabitProgress().isRecorded());
 
         Habit habit2 = new Habit("walking", 30);
         habit2.increment("totalCommittedDays");
         habit2.increment("currentStreak");
         date = new Date(1995, 11, 17, 3, 24, 0);
         habit2.getHabitProgress().addDate(date);
-        assertEquals(false, habit2.getHabitProgress().isRecorded());
+        assertFalse(habit2.getHabitProgress().isRecorded());
     }
 
     @Test
@@ -65,7 +68,6 @@ public class HabitProgressTest {
         habit1.getHabitProgress().getDateDifference();
         assertFalse(habit1.getHabitProgress().isCurrentStreakBroken());
 
-        //TODO: Check if test still works
         habit1.getHabitProgress().addDate(new Date(2021 - 1900, 1, 12));
         assertTrue(habit1.getHabitProgress().isCurrentStreakBroken());
     }
@@ -77,13 +79,43 @@ public class HabitProgressTest {
         habit1.increment("totalCommittedDays");
         habit1.increment("currentStreak");
 
-        habit1.getHabitProgress().addDate(date);
+        habit1.getHabitProgress().addDate(new Date());
+        assertTrue(habit1.getHabitProgress().isRecorded());
         assertEquals(0, habit1.getHabitProgress().getDateDifference());
 
-        //TODO: Check if test still works
-        habit1.getHabitProgress().addDate(new Date(2021 - 1900, 1, 12));
+        habit1.getHabitProgress().addDate(new Date(date.getTime() - 2*24*60*60*1000));
         assertEquals(2, habit1.getHabitProgress().getDateDifference());
+    }
 
+    @Test
+    public void testDatesCommittedToJson() {
+        try {
+            HabitList habitList = new HabitList();
+            habitList.addHabit(habit1);
+            habit1.getHabitProgress().addDate(new Date(date.getTime() - 2*24*60*60*1000));
+            assertFalse(habit1.getHabitProgress().isRecorded());
+            habit1.getHabitProgress().addDate(new Date(date.getTime() - 24*60*60*1000));
+            assertFalse(habit1.getHabitProgress().isRecorded());
+            habit1.getHabitProgress().addDate(new Date(date.getTime()));
+            assertTrue(habit1.getHabitProgress().isRecorded());
+
+            JSONArray datesCommitted = habit1.getHabitProgress().toJson().getJSONArray("datesCommitted");
+
+            JsonWriter writer = new JsonWriter("./data/testDatesCommittedToJson.json");
+            writer.open();
+            writer.write(habitList);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testDatesCommittedToJson.json");
+            habitList = reader.read();
+
+            assertEquals(date.getTime() - 2*24*60*60*1000, datesCommitted.get(0));
+            assertEquals(date.getTime() - 24*60*60*1000, datesCommitted.get(1));
+            assertEquals(date.getTime(), datesCommitted.get(2));
+
+        } catch (Exception e) {
+            fail("Exception should not have been thrown");
+        }
 
     }
 }

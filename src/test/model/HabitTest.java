@@ -7,7 +7,6 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: modify tests
 /*
  * This class tests the Habit class
  */

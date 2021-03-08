@@ -46,6 +46,7 @@ public class JsonReaderTest extends JsonTest {
             checkHabit("reading", 30, 2, 2, 2,
                     new Date(2021 - 1900, 2, 5), listOfHabits.get(0).getHabitProgress(),
                     true, listOfHabits.get(0));
+            
             checkHabit("running", 20, 3, 3, 3,
                     new Date(2021 - 1900, 2, 4), listOfHabits.get(1).getHabitProgress(),
                     true, listOfHabits.get(1));

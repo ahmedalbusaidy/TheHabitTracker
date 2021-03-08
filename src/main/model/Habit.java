@@ -1,5 +1,4 @@
 //TODO: replace java.Date with java.time in the whole project
-//TODO: delete the additional user stories if will not be implemented
 
 package model;
 
@@ -55,7 +54,6 @@ public class Habit implements Writable {
         this.commitmentTarget = commitmentTarget;
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets totalCommittedDays to streak
@@ -72,7 +70,6 @@ public class Habit implements Writable {
         this.currentStreak = streak;
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets highestStreak to streak
@@ -89,7 +86,6 @@ public class Habit implements Writable {
         startDate = date;
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets habitProgress to habitProgress
@@ -98,7 +94,6 @@ public class Habit implements Writable {
         this.habitProgress = habitProgress;
     }
 
-    //TODO: Newly added method, check if testing is needed
     /*
      * MODIFIES: this
      * EFFECTS:  sets streaksIncreasingTogether to bool
@@ -165,6 +160,8 @@ public class Habit implements Writable {
                 if (highestStreak > 0) {
                     highestStreak--;
                 }
+                break;
+            default:
                 break;
         }
     }
