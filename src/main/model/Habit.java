@@ -1,5 +1,3 @@
-//TODO: replace java.Date with java.time in the whole project
-
 package model;
 
 import org.json.JSONObject;

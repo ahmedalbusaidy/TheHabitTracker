@@ -4,14 +4,14 @@
         "streaksIncreasingTogether": true,
         "totalCommittedDays": 1,
         "habitProgress": {
-            "datesCommitted": [1615149070144],
+            "datesCommitted": [1615174117003],
             "isCurrentStreakBroken": false,
             "isRecorded": true
         },
         "highestStreak": 1,
-        "commitmentTarget": 20,
-        "habitName": "run",
-        "startDateInMilliseconds": 1615149064500
+        "commitmentTarget": 30,
+        "habitName": "running",
+        "startDateInMilliseconds": 1615174094836
     },
     {
         "currentStreak": 0,
@@ -23,8 +23,8 @@
             "isRecorded": false
         },
         "highestStreak": 0,
-        "commitmentTarget": 30,
-        "habitName": "walk",
-        "startDateInMilliseconds": 1615149082453
+        "commitmentTarget": 40,
+        "habitName": "reading",
+        "startDateInMilliseconds": 1615174106204
     }
 ]}
