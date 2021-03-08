@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 import model.HabitProgress;
 import org.json.*;
 
-// Represents a reader that reads habitList from JSON data stored in file
-// Class is modelled on the code from JsonSerializationDemo
+// Represents a reader that reads habitList from JSON data stored in file.
+// This class is modelled on the code from JsonSerializationDemo
 // URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReader {
     private String source;

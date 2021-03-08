@@ -10,9 +10,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
- * This class tests the HabitProgress class
- */
+// This class tests the HabitProgress class
 public class HabitProgressTest {
     private HabitProgress habitLog;
     private Date date;
@@ -83,7 +81,7 @@ public class HabitProgressTest {
         assertTrue(habit1.getHabitProgress().isRecorded());
         assertEquals(0, habit1.getHabitProgress().getDateDifference());
 
-        habit1.getHabitProgress().addDate(new Date(date.getTime() - 2*24*60*60*1000));
+        habit1.getHabitProgress().addDate(new Date(date.getTime() - 2 * 24 * 60 * 60 * 1000));
         assertEquals(2, habit1.getHabitProgress().getDateDifference());
     }
 
@@ -92,9 +90,9 @@ public class HabitProgressTest {
         try {
             HabitList habitList = new HabitList();
             habitList.addHabit(habit1);
-            habit1.getHabitProgress().addDate(new Date(date.getTime() - 2*24*60*60*1000));
+            habit1.getHabitProgress().addDate(new Date(date.getTime() - 2 * 24 * 60 * 60 * 1000));
             assertFalse(habit1.getHabitProgress().isRecorded());
-            habit1.getHabitProgress().addDate(new Date(date.getTime() - 24*60*60*1000));
+            habit1.getHabitProgress().addDate(new Date(date.getTime() - 24 * 60 * 60 * 1000));
             assertFalse(habit1.getHabitProgress().isRecorded());
             habit1.getHabitProgress().addDate(new Date(date.getTime()));
             assertTrue(habit1.getHabitProgress().isRecorded());
@@ -109,8 +107,8 @@ public class HabitProgressTest {
             JsonReader reader = new JsonReader("./data/testDatesCommittedToJson.json");
             habitList = reader.read();
 
-            assertEquals(date.getTime() - 2*24*60*60*1000, datesCommitted.get(0));
-            assertEquals(date.getTime() - 24*60*60*1000, datesCommitted.get(1));
+            assertEquals(date.getTime() - 2 * 24 * 60 * 60 * 1000, datesCommitted.get(0));
+            assertEquals(date.getTime() - 24 * 60 * 60 * 1000, datesCommitted.get(1));
             assertEquals(date.getTime(), datesCommitted.get(2));
 
         } catch (Exception e) {

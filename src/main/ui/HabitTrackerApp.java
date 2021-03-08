@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
+// Represents the habit tracker application
 public class HabitTrackerApp {
     private static final String JSON_STORE = "./data/habitTracker.json";
     private Scanner input;
@@ -371,7 +372,7 @@ public class HabitTrackerApp {
         return userInput1;
     }
 
-    //EFFECTS: sets the current streak of each habit in the list to 0 if the current streak is broken;
+    // EFFECTS: sets the current streak of each habit in the list to 0 if the current streak is broken;
     //         otherwise do nothing
     private void updateCurrentStreak() {
         for (Habit habit : habitList.getListOfHabits()) {

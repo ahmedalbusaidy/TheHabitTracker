@@ -7,13 +7,11 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
- * This class tests the Habit class
- */
+// This class tests the Habit class
 public class HabitTest {
-    private String habitName;           //name of the habit
-    private int commitmentTarget;       //number of days to commit per month
-    private Date startDate;             //start date i.e. the date habit was added
+    private String habitName;
+    private int commitmentTarget;
+    private Date startDate;
     private Habit running;
     private String variableName;
 

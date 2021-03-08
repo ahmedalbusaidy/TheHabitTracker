@@ -7,9 +7,8 @@ import persistence.Writable;
 
 import java.util.Date;
 
-/*
- * This class represents a habit and its attributes
- */
+
+// This class represents a habit and its attributes
 public class Habit implements Writable {
     private String habitName;               //name of the habit
     private int commitmentTarget;           //number of days to commit per month
@@ -20,15 +19,13 @@ public class Habit implements Writable {
     private HabitProgress habitProgress;    //keep track of the progress by dates
     boolean streaksIncreasingTogether;      //Keep track if the two streaks are increasing together
 
-    /*
-     * REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
-     * MODIFIES: HabitProgress
-     * EFFECTS:  name of the habit is set to habitName;
-     *           commitment target is set to commitmentTarget;
-     *           totalCommittedDays is set to zero;
-     *           constructs HabitProgress object to store habit progress;
-     *           sets streaksIncreasingTogether = false
-     */
+    // REQUIRES: habitName has a non-zero length; commitmentTarget >= 0
+    // MODIFIES: HabitProgress
+    // EFFECTS:  name of the habit is set to habitName;
+    //           commitment target is set to commitmentTarget;
+    //           totalCommittedDays is set to zero;
+    //           constructs HabitProgress object to store habit progress;
+    //           sets streaksIncreasingTogether = false
     public Habit(String habitName, int commitmentTarget) {
         this.habitName = habitName;
         this.commitmentTarget = commitmentTarget;
@@ -37,75 +34,59 @@ public class Habit implements Writable {
         streaksIncreasingTogether = false;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets this.habitName to habitName
-     */
+
+    // MODIFIES: this
+    // EFFECTS:  sets this.habitName to habitName
     public void setHabitName(String habitName) {
         this.habitName = habitName;
     }
 
-    /*
-     * REQUIRES: commitmentTarget >= 0
-     * MODIFIES: this
-     * EFFECTS:  sets this.commitmentTarget to commitmentTarget
-     */
+    // REQUIRES: commitmentTarget >= 0
+    // MODIFIES: this
+    // EFFECTS:  sets this.commitmentTarget to commitmentTarget
     public void setCommitmentTarget(int commitmentTarget) {
         this.commitmentTarget = commitmentTarget;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets totalCommittedDays to streak
-     */
+
+    // MODIFIES: this
+    // EFFECTS:  sets totalCommittedDays to streak
     public void setTotalCommittedDays(int totalCommittedDays) {
         this.totalCommittedDays = totalCommittedDays;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets currentStreak to streak
-     */
+    // MODIFIES: this
+    // EFFECTS:  sets currentStreak to streak
     public void setCurrentStreak(int streak) {
         this.currentStreak = streak;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets highestStreak to streak
-     */
+    // MODIFIES: this
+    // EFFECTS:  sets highestStreak to streak
     public void setHighestStreak(int streak) {
         this.highestStreak = streak;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets startDate to date
-     */
+    // MODIFIES: this
+    // EFFECTS:  sets startDate to date
     public void setStartDate(Date date) {
         startDate = date;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets habitProgress to habitProgress
-     */
+    // MODIFIES: this
+    // EFFECTS:  sets habitProgress to habitProgress
     public void setHabitProgress(HabitProgress habitProgress) {
         this.habitProgress = habitProgress;
     }
 
-    /*
-     * MODIFIES: this
-     * EFFECTS:  sets streaksIncreasingTogether to bool
-     */
+    // MODIFIES: this
+    // EFFECTS:  sets streaksIncreasingTogether to bool
     public void setStreaksIncreasingTogether(boolean bool) {
         this.streaksIncreasingTogether = bool;
     }
 
-    /*
-     * EFFECTS:  resets totalCommittedDays, currentStreak, and highestStreak to zero;
-     *           sets the date to today's date
-     */
+    // EFFECTS:  resets totalCommittedDays, currentStreak, and highestStreak to zero;
+    //           sets the date to today's date
     public void resetProgress() {
         totalCommittedDays = 0;
         currentStreak = 0;
@@ -113,15 +94,13 @@ public class Habit implements Writable {
         startDate = new Date();
     }
 
-    /*
-     * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
-     * MODIFIES: this
-     * EFFECTS:  if case = "totalCommittedDays", increment totalCommittedDays by one;
-     *           else if case = "currentStreak" increment currentStreak by one and
-     *           if currentStreak > highestStreak then:
-     *              - set highestStreak = currentStreak
-     *              - set streaksIncreasingTogether = true
-     */
+    // REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
+    // MODIFIES: this
+    // EFFECTS:  if case = "totalCommittedDays", increment totalCommittedDays by one;
+    //           else if case = "currentStreak" increment currentStreak by one and
+    //           if currentStreak > highestStreak then:
+    //              - set highestStreak = currentStreak
+    //              - set streaksIncreasingTogether = true
     public void increment(String variableName) {
         switch (variableName) {
             case "totalCommittedDays":
@@ -137,13 +116,12 @@ public class Habit implements Writable {
         }
     }
 
-    /*
-     * REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
-     * MODIFIES: this
-     * EFFECTS:  if case = "totalCommittedDays" and totalCommittedDays > 0: decrement totalCommittedDays by one;
-     *           else if case = "currentStreak" and currentStreak > 0: decrement currentStreak by one;
-     *           else if case = "highestStreak" and highestStreak > 0: decrement highestStreak by one;
-     */
+
+    // REQUIRES: variableName equals either "totalCommittedDays", or "currentStreak", or "highestStreak"
+    // MODIFIES: this
+    // EFFECTS:  if case = "totalCommittedDays" and totalCommittedDays > 0: decrement totalCommittedDays by one;
+    //           else if case = "currentStreak" and currentStreak > 0: decrement currentStreak by one;
+    //           else if case = "highestStreak" and highestStreak > 0: decrement highestStreak by one;
     public void decrement(String variableName) {
         switch (variableName) {
             case "totalCommittedDays":
@@ -166,9 +144,7 @@ public class Habit implements Writable {
         }
     }
 
-    /*
-     * EFFECTS: returns a string representation of the habit progress
-     */
+    // EFFECTS: returns a string representation of the habit progress
     @Override
     public String toString() {
         int daysToTarget = commitmentTarget - totalCommittedDays;
@@ -177,62 +153,48 @@ public class Habit implements Writable {
         return habitStr;
     }
 
-    /*
-     * EFFECTS: returns habitName
-     */
+    // EFFECTS: returns habitName
     public String getHabitName() {
         return habitName;
     }
 
-    /*
-     * EFFECTS: returns commitmentTarget
-     */
+    // EFFECTS: returns commitmentTarget
     public int getCommitmentTarget() {
         return commitmentTarget;
     }
 
-    /*
-     * EFFECTS: return total committed days
-     */
+    // EFFECTS: return total committed days
     public int getTotalCommittedDays() {
         return totalCommittedDays;
     }
 
-    /*
-     * EFFECTS: return startDate
-     */
+    // EFFECTS: return startDate
     public Date getStartDate() {
         return startDate;
     }
 
-    /*
-     * EFFECTS: return currentStreak
-     */
+    // EFFECTS: return currentStreak
     public int getCurrentStreak() {
         return currentStreak;
     }
 
-    /*
-     * EFFECTS: return highestStreak
-     */
+    // EFFECTS: return highestStreak
     public int getHighestStreak() {
         return highestStreak;
     }
 
-    /*
-     * EFFECTS: return habitProgress
-     */
+    // EFFECTS: return habitProgress
     public HabitProgress getHabitProgress() {
         return habitProgress;
     }
 
-    /*
-     * EFFECTS: returns streaksIncreasingTogether
-     */
+
+    // EFFECTS: returns streaksIncreasingTogether
     public boolean getStreaksIncreasingTogether() {
         return streaksIncreasingTogether;
     }
 
+    // EFFECTS: returns JSONObject json, transforming this to JSON
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

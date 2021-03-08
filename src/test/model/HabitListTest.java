@@ -8,9 +8,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
- * This class tests the HabitList class
- */
+// This class tests the HabitList class
 public class HabitListTest {
     private HabitList habitList;
     private String habitName1;
@@ -42,16 +40,16 @@ public class HabitListTest {
         isAdded = habitList.addHabit(reading);
         assertEquals(1, habitList.getListOfHabits().size());
         assertTrue(habitList.containsHabit(reading));
-        assertEquals(true, isAdded);
+        assertTrue(isAdded);
 
         isAdded = habitList.addHabit(reading);
         assertEquals(1, habitList.getListOfHabits().size());
-        assertEquals(false, isAdded);
+        assertFalse(isAdded);
 
         isAdded = habitList.addHabit(coding);
         assertEquals(2, habitList.getListOfHabits().size());
         assertTrue(habitList.containsHabit(coding));
-        assertEquals(true, isAdded);
+        assertTrue(isAdded);
     }
 
     @Test
@@ -64,16 +62,16 @@ public class HabitListTest {
         isRemoved = habitList.removeHabit(coding);
         assertEquals(1, habitList.getListOfHabits().size());
         assertFalse(habitList.containsHabit(coding));
-        assertEquals(true, isRemoved);
+        assertTrue(isRemoved);
 
         isRemoved = habitList.removeHabit(coding);
         assertEquals(1, habitList.getListOfHabits().size());
-        assertEquals(false, isRemoved);
+        assertFalse(isRemoved);
 
         isRemoved = habitList.removeHabit(reading);
         assertEquals(0, habitList.getListOfHabits().size());
         assertFalse(habitList.containsHabit(reading));
-        assertEquals(true, isRemoved);
+        assertTrue(isRemoved);
     }
 
     @Test
@@ -82,10 +80,10 @@ public class HabitListTest {
         habitList.addHabit(reading);
 
         doesContainHabit = habitList.containsHabit(reading);
-        assertEquals(true, doesContainHabit);
+        assertTrue(doesContainHabit);
 
         doesContainHabit = habitList.containsHabit(coding);
-        assertEquals(false, doesContainHabit);
+        assertFalse(doesContainHabit);
     }
 
     @Test
