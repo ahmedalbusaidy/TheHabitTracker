@@ -1,6 +1,5 @@
 package ui;
 
-import com.sun.codemodel.internal.JForEach;
 import model.Habit;
 
 import javax.swing.*;

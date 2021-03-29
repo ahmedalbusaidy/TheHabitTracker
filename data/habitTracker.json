@@ -26,5 +26,19 @@
         "commitmentTarget": 20,
         "habitName": "Walking",
         "startDateInMilliseconds": 1616985101965
+    },
+    {
+        "currentStreak": 0,
+        "streaksIncreasingTogether": false,
+        "totalCommittedDays": 0,
+        "habitProgress": {
+            "datesCommitted": [],
+            "isCurrentStreakBroken": false,
+            "isRecorded": false
+        },
+        "highestStreak": 0,
+        "commitmentTarget": 20,
+        "habitName": "sleeping",
+        "startDateInMilliseconds": 1616986728507
     }
 ]}

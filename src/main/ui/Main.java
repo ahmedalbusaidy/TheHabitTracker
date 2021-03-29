@@ -183,10 +183,5 @@ public class Main extends FrameSetup {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        try {
-//            new HabitTrackerApp();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
     }
 }
