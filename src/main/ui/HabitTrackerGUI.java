@@ -1,4 +1,3 @@
-
 package ui;
 
 import model.Habit;
@@ -6,27 +5,27 @@ import model.HabitList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
 // Represents the habit tracker application
-public class HabitTrackerApp {
+public class HabitTrackerGUI {
     private static final String JSON_STORE = "./data/habitTracker.json";
     private Scanner input;
-    private HabitList habitList;
+    protected HabitList habitList;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-
     // EFFECTS: runs the tracker application
-    public HabitTrackerApp() throws FileNotFoundException {
+    public HabitTrackerGUI() throws FileNotFoundException {
         input = new Scanner(System.in);
         habitList = new HabitList();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        runTracker();
+        //runTracker();
     }
 
     // Prats of this method were taken from the Teller application
@@ -56,6 +55,10 @@ public class HabitTrackerApp {
         }
 
         System.out.println("\nGoodbye!");
+    }
+
+    public HabitList getHabitList() {
+        return habitList;
     }
 
     // Prats of this method were taken from TellerApp, and JsonSerializationDemo
@@ -91,21 +94,29 @@ public class HabitTrackerApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         switch (command) {
-            case "1": addHabit();
+            case "1":
+                addHabit();
                 break;
-            case "2": recordModifyProgress();
+            case "2":
+                recordModifyProgress();
                 break;
-            case "3": resetProgress();
+            case "3":
+                resetProgress();
                 break;
-            case "4": printLog();
+            case "4":
+                printLog();
                 break;
-            case "5": deleteHabit();
+            case "5":
+                deleteHabit();
                 break;
-            case "s": saveHabitsList();
+            case "s":
+                saveHabitsList();
                 break;
-            case "l": loadHabitsList();
+            case "l":
+                loadHabitsList();
                 break;
-            default: System.out.println("\nSelection not valid...");
+            default:
+                System.out.println("\nSelection not valid...");
                 break;
         }
     }
@@ -207,7 +218,7 @@ public class HabitTrackerApp {
     }
 
     // EFFECTS: saves the habits list to file
-    private void saveHabitsList() {
+    public void saveHabitsList() {
         try {
             jsonWriter.open();
             jsonWriter.write(habitList);
@@ -220,7 +231,7 @@ public class HabitTrackerApp {
 
     // MODIFIES: this
     // EFFECTS: loads the habits list from file
-    private void loadHabitsList() {
+    public void loadHabitsList() {
         try {
             habitList = jsonReader.read();
             System.out.println("Loaded your habits list from " + JSON_STORE);
@@ -232,7 +243,7 @@ public class HabitTrackerApp {
     //REQUIRES: habitName to not be an empty string
     //MODIFIES: this
     //EFFECTS:  adds a new habit to the list of habits
-    private Habit addHabitToListOfHabits(String habitName, int commitmentTarget) {
+    public Habit addHabitToListOfHabits(String habitName, int commitmentTarget) {
         Habit habit;
         habit = new Habit(habitName, commitmentTarget);
         habit.setStartDate(new Date());
@@ -383,3 +394,4 @@ public class HabitTrackerApp {
         }
     }
 }
+
