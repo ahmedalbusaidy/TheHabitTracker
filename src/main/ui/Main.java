@@ -114,12 +114,8 @@ public class Main extends FrameSetup {
         printSummaryLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Toolkit.getDefaultToolkit().beep();
-                    new PrintSummaryWindow();
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                Toolkit.getDefaultToolkit().beep();
+                new PrintSummaryWindow();
 
             }
         });

@@ -21,6 +21,7 @@ public class AddHabitWindow extends FrameSetup {
     String habitName;
     int commitmentTarget;
 
+    //EFFECTS: set add habit window frame
     public AddHabitWindow() throws FileNotFoundException {
         setupFrame();
         setupMainPanel();
