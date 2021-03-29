@@ -66,6 +66,7 @@ public class AddHabitWindow extends FrameSetup {
                 throw new Exception();
             }
         } catch (Exception e) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "Please enter a non-empty string!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -83,9 +84,11 @@ public class AddHabitWindow extends FrameSetup {
                 throw new Exception();
             }
         } catch (NumberFormatException e) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "Please enter an integer >= 0!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "Please enter an integer >= 0!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -122,6 +125,7 @@ public class AddHabitWindow extends FrameSetup {
                 setupHabitName();
                 habitTrackerGUI.addHabitToListOfHabits(habitName, commitmentTarget);
                 String[] responses = {"Done"};
+                Toolkit.getDefaultToolkit().beep();
                 int confirmed = JOptionPane.showOptionDialog(getContentPane(),
                         "Habit is Added Successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,

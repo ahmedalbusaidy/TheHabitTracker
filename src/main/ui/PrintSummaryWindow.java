@@ -4,7 +4,6 @@ import model.Habit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 import static ui.Main.habitTrackerGUI;
 
@@ -13,7 +12,7 @@ public class PrintSummaryWindow extends FrameSetup {
     private JLabel habitLabel;
     private JPanel habitsPanel;
 
-    public PrintSummaryWindow() throws FileNotFoundException {
+    public PrintSummaryWindow() {
         setupFrame();
         setupMainPanel();
         this.setTitle("Print Summary Log");

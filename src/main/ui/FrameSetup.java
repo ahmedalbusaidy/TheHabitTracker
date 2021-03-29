@@ -4,10 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrameSetup extends JFrame {
-
     public static final int SCREEN_WIDTH = 550;
     public static final int SCREEN_HEIGHT = 820;
-
 
     public FrameSetup() {
     }

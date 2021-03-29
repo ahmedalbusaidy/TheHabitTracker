@@ -30,7 +30,7 @@ public class Main extends FrameSetup {
         }
     }
 
-    public Main() throws FileNotFoundException {
+    public Main() {
         super();
         setupFrame();
         setupMainScreenPanel();
@@ -71,6 +71,7 @@ public class Main extends FrameSetup {
             public void actionPerformed(ActionEvent e) {
                 habitTrackerGUI.loadHabitsList();
                 String[] responses = {"Done"};
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showOptionDialog(getContentPane(),
                         "Your progress has been loaded successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
@@ -89,6 +90,7 @@ public class Main extends FrameSetup {
             public void actionPerformed(ActionEvent e) {
                 habitTrackerGUI.saveHabitsList();
                 String[] responses = {"Done"};
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showOptionDialog(getContentPane(),
                         "Your progress has been saved successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
@@ -113,6 +115,7 @@ public class Main extends FrameSetup {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    Toolkit.getDefaultToolkit().beep();
                     new PrintSummaryWindow();
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
@@ -145,8 +148,10 @@ public class Main extends FrameSetup {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    Toolkit.getDefaultToolkit().beep();
                     new AddHabitWindow();
                 } catch (FileNotFoundException fileNotFoundException) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(null, "File Not Found!",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -178,10 +183,6 @@ public class Main extends FrameSetup {
     }
 
     public static void main(String[] args) {
-        try {
-            new Main();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        new Main();
     }
 }
