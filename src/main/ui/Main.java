@@ -20,7 +20,7 @@ public class Main extends FrameSetup {
 
     private JPanel mainScreenPanel;
     private JPanel appIntroPanel;
-    public static HabitTrackerGUI habitTrackerGUI;
+    protected static HabitTrackerGUI habitTrackerGUI;
 
     static {
         try {
