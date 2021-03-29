@@ -74,7 +74,7 @@ public class Main extends FrameSetup {
                 JOptionPane.showOptionDialog(getContentPane(),
                         "Your progress has been loaded successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,null, responses, responses[0]);
+                        JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
             }
         });
     }
@@ -92,7 +92,7 @@ public class Main extends FrameSetup {
                 JOptionPane.showOptionDialog(getContentPane(),
                         "Your progress has been saved successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,null, responses, responses[0]);
+                        JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
             }
         });
     }

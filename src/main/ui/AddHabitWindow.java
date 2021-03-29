@@ -125,7 +125,7 @@ public class AddHabitWindow extends FrameSetup {
                 int confirmed = JOptionPane.showOptionDialog(getContentPane(),
                         "Habit is Added Successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,null, responses, responses[0]);
+                        JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
 
                 if (confirmed == 0) {
                     setVisible(false);

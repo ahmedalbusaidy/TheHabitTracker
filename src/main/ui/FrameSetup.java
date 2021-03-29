@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class FrameSetup extends JFrame {
 
@@ -10,7 +9,7 @@ public class FrameSetup extends JFrame {
     public static final int SCREEN_HEIGHT = 820;
 
 
-    public FrameSetup() throws FileNotFoundException {
+    public FrameSetup() {
     }
 
     public void setupFrame() {
@@ -19,7 +18,7 @@ public class FrameSetup extends JFrame {
         //prevent frame from being resized
         this.setResizable(false);
         //sets the x-dimension, and y-dimension of frame
-        this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+        this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         //change color of background
         this.getContentPane().setBackground(new Color(0xFFFFFF));
     }

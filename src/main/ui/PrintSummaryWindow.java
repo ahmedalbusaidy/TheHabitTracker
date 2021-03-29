@@ -31,7 +31,7 @@ public class PrintSummaryWindow extends FrameSetup {
     }
 
     private void setupHabitLabel() {
-        for (Habit habit: habitTrackerGUI.getHabitList().getListOfHabits()) {
+        for (Habit habit : habitTrackerGUI.getHabitList().getListOfHabits()) {
             String habitName = habit.getHabitName();
             habitLabel = new JLabel(habitName);
             habitsPanel.add(habitLabel);
@@ -42,8 +42,6 @@ public class PrintSummaryWindow extends FrameSetup {
     private void setupHabitPanel() {
         habitsPanel = new JPanel(new GridLayout(2, 1, 0, 5));
     }
-
-
 
 
 }
