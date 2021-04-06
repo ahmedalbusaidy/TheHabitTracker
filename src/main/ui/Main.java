@@ -104,6 +104,13 @@ public class Main extends FrameSetup {
         deleteHabitButton = new JButton("Delete Progress");
         deleteHabitButton.setFocusable(false);
         mainScreenPanel.add(deleteHabitButton);
+        deleteHabitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Toolkit.getDefaultToolkit().beep();
+                new DeleteProgressWindow();
+            }
+        });
     }
 
     //EFFECTS:  setup printSummaryLogButton
@@ -116,7 +123,6 @@ public class Main extends FrameSetup {
             public void actionPerformed(ActionEvent e) {
                 Toolkit.getDefaultToolkit().beep();
                 new PrintSummaryWindow();
-
             }
         });
     }
@@ -126,6 +132,13 @@ public class Main extends FrameSetup {
         resetProgressButton = new JButton("Reset Progress");
         resetProgressButton.setFocusable(false);
         mainScreenPanel.add(resetProgressButton);
+        resetProgressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Toolkit.getDefaultToolkit().beep();
+                new ResetProgressWindow();
+            }
+        });
     }
 
     //EFFECTS:  setup recordOrModifyProgressButton
@@ -133,6 +146,13 @@ public class Main extends FrameSetup {
         recordOrModifyProgressButton = new JButton("Record or Modify Progress");
         recordOrModifyProgressButton.setFocusable(false);
         mainScreenPanel.add(recordOrModifyProgressButton);
+        recordOrModifyProgressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Toolkit.getDefaultToolkit().beep();
+                new RecordProgressWindow();
+            }
+        });
     }
 
     //EFFECTS:  setup addNewHabitButton

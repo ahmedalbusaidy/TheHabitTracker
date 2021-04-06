@@ -89,6 +89,7 @@ public class Habit implements Writable {
         totalCommittedDays = 0;
         currentStreak = 0;
         highestStreak = 0;
+        habitProgress.removeDate();
         startDate = new Date();
     }
 

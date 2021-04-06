@@ -79,7 +79,6 @@ public class AddHabitWindow extends FrameSetup {
             int target = Integer.parseInt(targetTF.getText());
 
             if (target >= 0) {
-                System.out.println(target);
                 setCommitmentTarget(target);
             } else {
                 throw new Exception();
