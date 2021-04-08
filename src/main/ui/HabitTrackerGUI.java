@@ -19,53 +19,58 @@ public class HabitTrackerGUI {
     private JsonReader jsonReader;
 
     // EFFECTS: runs the tracker application
-    public HabitTrackerGUI() throws FileNotFoundException {
+    public HabitTrackerGUI() {
         habitList = new HabitList();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    //EFFECTS:  returns habitList
     public HabitList getHabitList() {
         return habitList;
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, Habit, HabitList, HabitProgress
     //EFFECTS:  resets progress
     public void resetProgress(Habit habit) {
         habit.resetProgress();
     }
 
-    //MODIFIES: this
+    //MODIFIES: this, HabitList
+    //EFFECTS:  delete habit from the list of habit
     public void deleteHabit(Habit habit) {
         habitList.removeHabit(habit);
     }
 
-    // EFFECTS: saves the habits list to file
+    //MODIFIES: this
+    //EFFECTS:  saves the habits list to file
+    //          displays an error message if FileNotFoundException is thrown
     public void saveHabitsList() {
         try {
             jsonWriter.open();
             jsonWriter.write(habitList);
             jsonWriter.close();
-            System.out.println("Saved your habits list to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null, "File Not Found! " + JSON_STORE,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: loads the habits list from file
+    // EFFECTS:  loads the habits list from file
+    //          displays an error message if IOException is thrown
     public void loadHabitsList() {
         try {
             habitList = jsonReader.read();
         } catch (IOException e) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE,
+            JOptionPane.showMessageDialog(null, "Unable to read from file! " + JSON_STORE,
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    //REQUIRES: habitName to not be an empty string
-    //MODIFIES: this
+    //MODIFIES: this, Habit, HabitList
     //EFFECTS:  adds a new habit to the list of habits
     public void addHabitToListOfHabits(String habitName, int commitmentTarget) {
         Habit habit;
@@ -75,8 +80,9 @@ public class HabitTrackerGUI {
     }
 
 
-    //MODIFIES: this
-    //EFFECTS: processes user command from recordModifyProgress method
+    //MODIFIES: this, Habit, HabitList, HabitProgress
+    //EFFECTS:  records today's progress as completed so totalCommittedDays and currentStreak are incremented,
+    //          and today's date is added to HabitProgress
     public void updateHabitProgressIsCompleted(Habit habit) {
         if (!habit.getHabitProgress().isRecorded()) {
             habit.increment("totalCommittedDays");
@@ -85,8 +91,13 @@ public class HabitTrackerGUI {
         }
     }
 
-    //MODIFIES: this
-    //EFFECTS:  processes modify habit progress to not recorded
+    //MODIFIES: this, Habit, HabitList, HabitProgress
+    //EFFECTS:  records today's progress as uncompleted:
+    //          if habit.getHabitProgress().isRecorded() then:
+    //              totalCommittedDays and currentStreak are decremented;
+    //              if habit.getStreaksIncreasingTogether() then:
+    //                  decrement highestStreak;
+    //              remove today's date from HabitProgress
     public void updateHabitProgressNotCompleted(Habit habit) {
         if (habit.getHabitProgress().isRecorded()) {
             habit.decrement("totalCommittedDays");

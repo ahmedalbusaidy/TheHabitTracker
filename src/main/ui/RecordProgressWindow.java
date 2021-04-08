@@ -3,13 +3,11 @@ package ui;
 import model.Habit;
 
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static ui.Main.habitTrackerGUI;
 
+//This class sets up record progress window
 public class RecordProgressWindow extends HabitsTable {
     private JPanel mainPanel;
     private JTable table;
@@ -36,6 +34,8 @@ public class RecordProgressWindow extends HabitsTable {
         frame.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS:  setup main panel
     private void setupMainPanel() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -46,16 +46,18 @@ public class RecordProgressWindow extends HabitsTable {
         mainPanel.add(doneButton);
     }
 
+    //MODIFIES: this
+    //EFFECTS:  setup done button. If done button is clicked:
+    //              hides record progress window and return to main menu
     private void setupDoneButton() {
         doneButton = new JButton("Done");
-        doneButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-            }
-        });
+        doneButton.addActionListener(e -> frame.setVisible(false));
     }
 
+    //MODIFIES: this, HabitTrackerGUI, HabitProgress, HabitList, Habit
+    //EFFECTS:  setup habits table. When a habit is checked, the checkbox is checked, and habit progress for today
+    //          is updated i.e. totalCommittedDays, currentStreak, highestStreak are incremented, and today's date
+    //          is added to habitProgress
     private void setupTable() {
         table = new JTable(new HabitsTable("record")) {
             @Override

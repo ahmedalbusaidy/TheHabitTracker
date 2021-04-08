@@ -7,22 +7,58 @@ import javax.swing.table.AbstractTableModel;
 
 import static ui.Main.habitTrackerGUI;
 
+//This class sets up habit table model
 public class HabitsTable extends AbstractTableModel {
     //headers for the table
-    private String[] columns = new String[] {
+    private String[] columns = new String[]{
             "#", "Habit Name", "Current Streak", "Highest Streak",
             "Target", "Total Progress", "Days left", "null"
     };
-
     private int habitListSize = habitTrackerGUI.getHabitList().getListOfHabits().size();
     protected Object[][] data = new Object[habitListSize][columns.length];
     private JTable table = new JTable(data, columns);
 
-    //MODIFIES: this
     //EFFECTS:  setup habit table
     public HabitsTable(String command) {
         populateTableBody(command);
         setLastColumnHeaderTitle(command);
+    }
+
+    //EFFECTS:  returns column count
+    public int getColumnCount() {
+        return columns.length;
+    }
+
+    //EFFECTS:  returns row count
+    public int getRowCount() {
+        return data.length;
+    }
+
+    //EFFECTS:  returns column name
+    public String getColumnName(int col) {
+        return columns[col];
+    }
+
+    //EFFECTS:  returns cell value at given row and col
+    public Object getValueAt(int row, int col) {
+        return data[row][col];
+    }
+
+    //EFFECTS:  change default renderer so that boolean is displayed as checkbox rather than string ("true"/"false")
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+
+    //EFFECTS:  sets cells at column 7 to be editable
+    public boolean isCellEditable(int row, int col) {
+        return col == 7;
+    }
+
+    //EFFECTS:  sets the value of the editable cells with the value inputted by the user, i.e. column 7 checkbox is
+    //          set to checked or unchecked
+    public void setValueAt(Object value, int row, int col) {
+        data[row][col] = value;
+        fireTableCellUpdated(row, col);
     }
 
     //MODIFIES: this
@@ -53,51 +89,11 @@ public class HabitsTable extends AbstractTableModel {
             data[i][4] = habit.getCommitmentTarget();
             data[i][5] = habit.getTotalCommittedDays();
             data[i][6] = habit.getCommitmentTarget() - habit.getTotalCommittedDays();
-            switch (command) {
-                case "record":
-                    data[i][7] = habit.getHabitProgress().isRecorded();
-                    break;
-                default:
-                    data[i][7] = new Boolean(false);
-                    break;
+            if ("record".equals(command)) {
+                data[i][7] = habit.getHabitProgress().isRecorded();
+            } else {
+                data[i][7] = new Boolean(false);
             }
         }
-    }
-
-    public int getColumnCount() {
-        return columns.length;
-    }
-
-    public int getRowCount() {
-        return data.length;
-    }
-
-    public String getColumnName(int col) {
-        return columns[col];
-    }
-
-    public Object getValueAt(int row, int col) {
-        return data[row][col];
-    }
-
-    /*
-     * JTable uses this method to determine the default renderer/
-     * editor for each cell.  If we didn't implement this method,
-     * then the last column would contain text ("true"/"false"),
-     * rather than a check box.
-     */
-    public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
-    }
-
-    public boolean isCellEditable(int row, int col) {
-        //Note that the data/cell address is constant,
-        //no matter where the cell appears onscreen.
-        return col == 7;
-    }
-
-    public void setValueAt(Object value, int row, int col) {
-        data[row][col] = value;
-        fireTableCellUpdated(row, col);
     }
 }

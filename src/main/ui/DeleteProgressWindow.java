@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import static ui.Main.habitTrackerGUI;
 
+//This class sets up delete progress window
 public class DeleteProgressWindow extends HabitsTable {
     private JPanel mainPanel;
     private JTable table;
@@ -38,32 +39,38 @@ public class DeleteProgressWindow extends HabitsTable {
         frame.setVisible(true);
     }
 
+    //MODIFIES: this, HabitTrackerGUI, HabitProgress, HabitList, Habit
+    //EFFECTS:  setup delete button. If delete button is clicked then:
+    //              Display warning message requesting user to confirm action (Yes-No option). If "yes" is clicked then:
+    //                  delete all selected habits from the habit list;
+    //                  hide warning message and update table;
+    //              Otherwise:
+    //                  hide warning message and no other action is performed
     private void setupDeleteButton() {
         deleteButton = new JButton("Delete");
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int input = JOptionPane.showConfirmDialog(frame.getContentPane(),
-                        "Do you want to delete all selected habits?", "Select an Option...",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
-                if (input == JOptionPane.YES_OPTION) {
-                    int[] previousIndex = {0};
-                    for (int i = 0; i < table.getRowCount(); i++) {
-                        boolean isChecked = (boolean) table.getValueAt(i, 7);
-                        Habit habit = habitTrackerGUI.getHabitList().getListOfHabits().get(previousIndex[0]);
-                        if (isChecked) {
-                            habitTrackerGUI.deleteHabit(habit);
-                        } else {
-                            previousIndex[0]++;
-                        }
+        deleteButton.addActionListener(e -> {
+            int input = JOptionPane.showConfirmDialog(frame.getContentPane(),
+                    "Do you want to delete all selected habits?", "Select an Option...",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
+            if (input == JOptionPane.YES_OPTION) {
+                int[] previousIndex = {0};
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    boolean isChecked = (boolean) table.getValueAt(i, 7);
+                    Habit habit = habitTrackerGUI.getHabitList().getListOfHabits().get(previousIndex[0]);
+                    if (isChecked) {
+                        habitTrackerGUI.deleteHabit(habit);
+                    } else {
+                        previousIndex[0]++;
                     }
                 }
-                frame.setVisible(false);
-                table.setModel(new DeleteProgressWindow());
             }
+            frame.setVisible(false);
+            table.setModel(new DeleteProgressWindow());
         });
     }
 
+    //MODIFIES: this
+    //EFFECTS:  sets up main panel
     private void setupMainPanel() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -76,16 +83,16 @@ public class DeleteProgressWindow extends HabitsTable {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS:  sets up done button. If done button is clicked:
+    //              hides delete habit window and returns to main menu
     private void setupDoneButton() {
         doneButton = new JButton("Done");
-        doneButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-            }
-        });
+        doneButton.addActionListener(e -> frame.setVisible(false));
     }
 
+    //MODIFIES: this
+    //EFFECTS:  setup habit table which displays all habits and their progress details
     private void setupTable() {
         table = new JTable(new HabitsTable("delete"));
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));

@@ -1,11 +1,11 @@
 package ui;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static ui.FrameSetup.SCREEN_HEIGHT;
 
+//This class sets up print summary log window
 public class PrintSummaryWindow extends HabitsTable {
     private JTable table;
     private FrameSetup frame;
@@ -27,13 +27,12 @@ public class PrintSummaryWindow extends HabitsTable {
         frame.setVisible(true);
     }
 
-    //EFFECTS:  setup habit table
+    //MODIFIES: this
+    //EFFECTS:  setup habit table which displays all habits and their progress details
     private void setupTable() {
         table = new JTable(new HabitsTable("print"));
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         table.removeColumn(table.getColumnModel().getColumn(7));
     }
-
-
 }
