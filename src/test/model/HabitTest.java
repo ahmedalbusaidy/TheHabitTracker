@@ -71,11 +71,13 @@ public class HabitTest {
         running.increment(variableName);
         running.increment(variableName);
 
-        running.setStartDate(new Date());
+        Date date = new Date();
+        running.setStartDate(date);
         running.resetProgress();
         assertEquals(0, running.getTotalCommittedDays());
         assertEquals(0, running.getCurrentStreak());
         assertEquals(0, running.getHighestStreak());
+        assertFalse(running.getHabitProgress().getDatesCommitted().contains(date));
         assertNotEquals(startDate, running.getStartDate());
     }
 
