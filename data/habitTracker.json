@@ -1,62 +1,70 @@
 {"listOfHabits": [
     {
-        "currentStreak": 1,
+        "currentStreak": 2,
         "streaksIncreasingTogether": true,
-        "totalCommittedDays": 1,
+        "totalCommittedDays": 2,
         "habitProgress": {
-            "datesCommitted": [1617692446684],
+            "datesCommitted": [
+                1617692446684,
+                1617829744605
+            ],
             "isCurrentStreakBroken": false,
             "isRecorded": true
         },
-        "highestStreak": 1,
+        "highestStreak": 2,
         "commitmentTarget": 20,
         "habitName": "Walking",
         "startDateInMilliseconds": 1617691230197
     },
     {
-        "currentStreak": 2,
+        "currentStreak": 3,
         "streaksIncreasingTogether": true,
-        "totalCommittedDays": 2,
+        "totalCommittedDays": 3,
         "habitProgress": {
             "datesCommitted": [
                 1617691221072,
-                1617692474641
+                1617692474641,
+                1617829743499
             ],
             "isCurrentStreakBroken": false,
             "isRecorded": true
         },
-        "highestStreak": 2,
+        "highestStreak": 3,
         "commitmentTarget": 60,
         "habitName": "Coding",
         "startDateInMilliseconds": 1617691216235
     },
     {
-        "currentStreak": 2,
+        "currentStreak": 3,
         "streaksIncreasingTogether": true,
-        "totalCommittedDays": 2,
+        "totalCommittedDays": 3,
         "habitProgress": {
             "datesCommitted": [
                 1617691421431,
-                1617692444253
+                1617692444253,
+                1617829747753
             ],
             "isCurrentStreakBroken": false,
             "isRecorded": true
         },
-        "highestStreak": 2,
+        "highestStreak": 3,
         "commitmentTarget": 100,
         "habitName": "Running",
         "startDateInMilliseconds": 1617691416973
     },
     {
-        "currentStreak": 1,
+        "currentStreak": 2,
         "streaksIncreasingTogether": true,
-        "totalCommittedDays": 1,
+        "totalCommittedDays": 2,
         "habitProgress": {
-            "datesCommitted": [1617692443587],
+            "datesCommitted": [
+                1617692443587,
+                1617829748259
+            ],
             "isCurrentStreakBroken": false,
             "isRecorded": true
         },
-        "highestStreak": 1,
+        "highestStreak": 2,
         "commitmentTarget": 15,
         "habitName": "Investing in Stocks",
         "startDateInMilliseconds": 1617692345601

@@ -1,48 +1,38 @@
 package ui;
 
-import model.Habit;
-
 import javax.swing.*;
+
 import java.awt.*;
 
-import static ui.Main.habitTrackerGUI;
+import static ui.FrameSetup.SCREEN_HEIGHT;
 
-public class PrintSummaryWindow extends FrameSetup {
+public class PrintSummaryWindow extends HabitsTable {
     private JTable table;
+    private FrameSetup frame;
 
     //EFFECTS: set up summary log window frame
     public PrintSummaryWindow() {
-        setupFrame();
+        super("print");
+        frame = new FrameSetup();
         setupTable();
+        setupFrame();
+    }
 
-        this.add(new JScrollPane(table)); //add the table to the frame
-        this.setTitle("Print Summary Log");
-        this.setSize(SCREEN_HEIGHT, SCREEN_HEIGHT);
-        setVisible(true);
+    //MODIFIES: this
+    //EFFECTS:  setup frame of Print Summary Window
+    private void setupFrame() {
+        frame.add(new JScrollPane(table)); //add the table to the frame
+        frame.setTitle("Print Summary Log");
+        frame.setSize(SCREEN_HEIGHT, SCREEN_HEIGHT);
+        frame.setVisible(true);
     }
 
     //EFFECTS:  setup habit table
     private void setupTable() {
-        //headers for the table
-        String[] columns = new String[] {
-                "#", "Habit Name", "Current Streak", "Highest Streak", "Target", "Total Progress", "Days left"
-        };
-
-        int habitListSize = habitTrackerGUI.getHabitList().getListOfHabits().size();
-        Object[][] data = new Object[habitListSize][columns.length];
-
-        for (int i = 0; i < habitListSize; i++) {
-            Habit habit = habitTrackerGUI.getHabitList().getListOfHabits().get(i);
-            data[i][0] = i + 1;
-            data[i][1] = habit.getHabitName();
-            data[i][2] = habit.getCurrentStreak();
-            data[i][3] = habit.getHighestStreak();
-            data[i][4] = habit.getCommitmentTarget();
-            data[i][5] = habit.getTotalCommittedDays();
-            data[i][6] = habit.getCommitmentTarget() - habit.getTotalCommittedDays();
-
-        }
-        table = new JTable(data, columns);
+        table = new JTable(new HabitsTable("print"));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        table.setFillsViewportHeight(true);
+        table.removeColumn(table.getColumnModel().getColumn(7));
     }
 
 

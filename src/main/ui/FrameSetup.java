@@ -8,16 +8,13 @@ public class FrameSetup extends JFrame {
     public static final int SCREEN_HEIGHT = 820;
 
     public FrameSetup() {
-    }
-
-    public void setupFrame() {
         //sets title of frame
-        this.setTitle("The Habit Tracker");
+        setTitle("The Habit Tracker");
         //prevent frame from being resized
-        this.setResizable(false);
+        setResizable(false);
         //sets the x-dimension, and y-dimension of frame
-        this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         //change color of background
-        this.getContentPane().setBackground(new Color(0xFFFFFF));
+        getContentPane().setBackground(new Color(0xFFFFFF));
     }
 }

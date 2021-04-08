@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import static ui.Main.habitTrackerGUI;
 
 
-public class AddHabitWindow extends FrameSetup {
+public class AddHabitWindow {
     private JPanel mainPanel;
     private JPanel formPanel;
     private JButton addButton;
@@ -18,17 +18,24 @@ public class AddHabitWindow extends FrameSetup {
     private JLabel targetLabel;
     private JTextField nameTF;
     private JTextField targetTF;
+    private FrameSetup frame;
     String habitName;
     int commitmentTarget;
 
     //EFFECTS: set add habit window frame
     public AddHabitWindow() throws FileNotFoundException {
-        setupFrame();
+        frame = new FrameSetup();
         setupMainPanel();
         clickAddButton();
-        this.setTitle("Add a New Habit");
-        this.add(mainPanel);
-        setVisible(true);
+        setupFrame();
+    }
+
+    //MODIFIES: this
+    //EFFECTS:  setup frame for add habit window
+    private void setupFrame() {
+        frame.setTitle("Add a New Habit");
+        frame.add(mainPanel);
+        frame.setVisible(true);
     }
 
     //EFFECTS:  set habitName to name
@@ -126,13 +133,13 @@ public class AddHabitWindow extends FrameSetup {
                 habitTrackerGUI.addHabitToListOfHabits(habitName, commitmentTarget);
                 String[] responses = {"Done"};
                 Toolkit.getDefaultToolkit().beep();
-                int confirmed = JOptionPane.showOptionDialog(getContentPane(),
+                int confirmed = JOptionPane.showOptionDialog(frame.getContentPane(),
                         "Habit is Added Successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
                         JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
 
                 if (confirmed == 0) {
-                    setVisible(false);
+                    frame.setVisible(false);
                 }
             }
 

@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
-public class Main extends FrameSetup {
+public class Main {
     private JButton addNewHabitButton;
     private JButton recordOrModifyProgressButton;
     private JButton resetProgressButton;
@@ -20,6 +20,7 @@ public class Main extends FrameSetup {
 
     private JPanel mainScreenPanel;
     private JPanel appIntroPanel;
+    private FrameSetup frame;
     protected static HabitTrackerGUI habitTrackerGUI;
 
     static {
@@ -31,15 +32,19 @@ public class Main extends FrameSetup {
     }
 
     public Main() {
-        super();
-        setupFrame();
+        frame = new FrameSetup();
         setupMainScreenPanel();
+        setupFrame();
+    }
 
-        this.setTitle("The Habit Tracker");
+    //MODIFIES: this
+    //EFFECTS:  setup main frame
+    private void setupFrame() {
+        frame.setTitle("The Habit Tracker");
         //exit from application
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(mainScreenPanel);
-        this.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(mainScreenPanel);
+        frame.setVisible(true);
     }
 
     //EFFECTS: set up main screen panel with welcome text and option buttons
@@ -72,7 +77,7 @@ public class Main extends FrameSetup {
                 habitTrackerGUI.loadHabitsList();
                 String[] responses = {"Done"};
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showOptionDialog(getContentPane(),
+                JOptionPane.showOptionDialog(frame.getContentPane(),
                         "Your progress has been loaded successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
                         JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
@@ -91,7 +96,7 @@ public class Main extends FrameSetup {
                 habitTrackerGUI.saveHabitsList();
                 String[] responses = {"Done"};
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showOptionDialog(getContentPane(),
+                JOptionPane.showOptionDialog(frame.getContentPane(),
                         "Your progress has been saved successfully!",
                         "Confirmation Message", JOptionPane.CANCEL_OPTION,
                         JOptionPane.INFORMATION_MESSAGE, null, responses, responses[0]);
