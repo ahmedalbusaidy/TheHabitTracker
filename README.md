@@ -46,6 +46,11 @@ committed days, and maximum commitments in a row
 - As a user, I want to be able to be able to load my habit list from file
 - As a user, when I start the application, I want to be given the option to load my habit list from file
 
+### Phase 4: Task 2
+- Type hierarchy icluded other than the one that uses the Saveable interface introduced in Phase 2:
+- HabitsTable extends AbstractTableModel
+- DeleteProgressWindow, RecordProgressWindow, PrintSummaryWindow, ResetProgressWindow extends HabitsTable
+
 ### References
 1- Teller Application
 
