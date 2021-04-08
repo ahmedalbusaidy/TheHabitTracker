@@ -52,7 +52,14 @@ committed days, and maximum commitments in a row
 - DeleteProgressWindow, RecordProgressWindow, PrintSummaryWindow, ResetProgressWindow extends HabitsTable
 
 ### Phase 4: Task 3
-
+- In the root folder I have added a UML diagram class diagram that represents the final version of this code. From the
+first look it seems not easy to read without tracing the arrows from class to class. Most of the arrows are
+associations. I made a good job in extracting common code into a superclass and connects some subclasses by
+inheritance relationship. However, I believe that the code could be better improved by reducing associations and 
+making the code more robust. I can get rid of the HabitTrackerCUI, which is the old console user interface. Also, many
+of the classes can be combined and reduce the number of windows, for instance: the save and load buttons could be
+implemented as a drop-down menu, and the other functions could all be in one window with few buttons to perform the
+actions (adding/deleting habit, recording/modifying/resetting progress, and printing summary).
 
 ### References
 1- Teller Application

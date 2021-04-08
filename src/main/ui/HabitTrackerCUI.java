@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 // Represents the habit tracker application
-public class HabitTrackerApp {
+public class HabitTrackerCUI {
     private static final String JSON_STORE = "./data/habitTracker.json";
     private Scanner input;
     private HabitList habitList;
@@ -21,7 +21,7 @@ public class HabitTrackerApp {
 
 
     // EFFECTS: runs the tracker application
-    public HabitTrackerApp() throws FileNotFoundException {
+    public HabitTrackerCUI() throws FileNotFoundException {
         input = new Scanner(System.in);
         habitList = new HabitList();
         jsonWriter = new JsonWriter(JSON_STORE);

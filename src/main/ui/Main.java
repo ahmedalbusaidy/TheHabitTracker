@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 //This class set up the main window of the habit tracker
 public class Main {
@@ -95,7 +94,7 @@ public class Main {
         mainScreenPanel.add(deleteHabitButton);
         deleteHabitButton.addActionListener(e -> {
             Toolkit.getDefaultToolkit().beep();
-            new DeleteProgressWindow();
+            new DeleteHabitWindow();
         });
     }
 

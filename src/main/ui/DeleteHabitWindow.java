@@ -5,13 +5,11 @@ import model.Habit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static ui.Main.habitTrackerGUI;
 
 //This class sets up delete progress window
-public class DeleteProgressWindow extends HabitsTable {
+public class DeleteHabitWindow extends HabitsTable {
     private JPanel mainPanel;
     private JTable table;
     private JButton doneButton;
@@ -19,7 +17,7 @@ public class DeleteProgressWindow extends HabitsTable {
     private FrameSetup frame;
 
     //EFFECTS:  constructs record progress window
-    public DeleteProgressWindow() {
+    public DeleteHabitWindow() {
         super("delete");
         frame = new FrameSetup();
         setupTable();
@@ -65,7 +63,7 @@ public class DeleteProgressWindow extends HabitsTable {
                 }
             }
             frame.setVisible(false);
-            table.setModel(new DeleteProgressWindow());
+            table.setModel(new DeleteHabitWindow());
         });
     }
 
