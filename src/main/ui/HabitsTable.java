@@ -56,6 +56,7 @@ public class HabitsTable extends AbstractTableModel {
 
     //EFFECTS:  sets the value of the editable cells with the value inputted by the user, i.e. column 7 checkbox is
     //          set to checked or unchecked
+    @Override
     public void setValueAt(Object value, int row, int col) {
         data[row][col] = value;
         fireTableCellUpdated(row, col);
