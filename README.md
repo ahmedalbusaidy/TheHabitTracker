@@ -8,8 +8,8 @@ features like: the habit tracker, mood tracker, sleep log, gratitude log, brain 
 project, I introduce the **Habit Tracker**, an easy way to track new habits where you will be able to:
 - Add a new habit with your commitment target (# of days per month)
 - Delete habits that you are no longer in need
-- Record/Modify your progress easily by answering Yes/No question
-- Print log of your habits altogether or each individually
+- Record/Modify your progress easily
+- Display summary log of your habits and progress for each
 - Reset log to start all over again
 
 If you want an easy way to stick to your habits, and track you progress then this project is designed for you. It is 
