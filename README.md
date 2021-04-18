@@ -46,12 +46,12 @@ committed days, and maximum commitments in a row
 - As a user, I want to be able to be able to load my habit list from file
 - As a user, when I start the application, I want to be given the option to load my habit list from file
 
-### Phase 4: Task 2
-- Type hierarchy included in my code other than the one that uses the Saveable interface introduced in Phase 2:
+### Java language constructs I added to my project
+Type hierarchy included in my code other than the one that uses the Saveable interface introduced in Phase 2:
 - HabitsTable extends AbstractTableModel
 - DeleteProgressWindow, RecordProgressWindow, PrintSummaryWindow, ResetProgressWindow extends HabitsTable
 
-### Phase 4: Task 3
+### Reflecting on the design presented in my UML class diagram
 - In the root folder I have added a UML diagram class diagram that represents the final version of this code. From the
 first look it seems not easy to read without tracing the arrows from class to class. Most of the arrows are
 associations. I made a good job in extracting common code into a superclass and connects some subclasses by
